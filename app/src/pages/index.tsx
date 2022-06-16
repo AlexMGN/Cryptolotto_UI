@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { RewardsView } from "../views";
 
-const Rewards: NextPage = (props) => {
+const Index: NextPage = (props) => {
   return (
     <div>
       <Head>
@@ -17,4 +17,4 @@ const Rewards: NextPage = (props) => {
   );
 };
 
-export default Rewards;
+export default Index;
