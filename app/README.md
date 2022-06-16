@@ -1,1 +1,3 @@
 # Cryptolotto
+
+Coming soon
