@@ -102,6 +102,11 @@ a {
     max-height: 500px;
   }
 
+  .reward-table-mobile {
+    width: 75vw !important;
+    max-height: 600px;
+  }
+
   .wallet-button {
     margin-right: 25px;
     margin-left: 30px;

@@ -273,7 +273,7 @@ export const LotteriesView: FC<{lotterie: string}> = ({ lotterie }) => {
           </div>
 
           <div className="md:hidden">
-            <div className="relative mt-14 reward-table md:w-[80vw] xl:w-[50vw] overflow-x-auto" style={{ borderRadius: "20px" }}>
+            <div className="flex mt-14 reward-table-mobile mb-10 overflow-x-auto" style={{ borderRadius: "20px" }}>
               <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead className="uppercase bg-primary text-neutral">
                 <tr className="flex flex-row w-full items-center justify-evenly pt-10">
@@ -296,9 +296,9 @@ export const LotteriesView: FC<{lotterie: string}> = ({ lotterie }) => {
                     <div>
                       {
                         (minutes === null && seconds === null && hours === null)
-                          ? <p className="text-center text-3xl font-bold mt-5">Searching lottery...</p> : (minutes === 0 && seconds === 0 && hours === 0)
+                          ? <p className="text-center text-xl font-bold mt-5">Searching lottery...</p> : (minutes === 0 && seconds === 0 && hours === 0)
                             ? <p className="text-center text-3xl font-bold mt-5">Closed </p>
-                            : <p className="text-center text-5xl font-bold mt-5"> {hours > 0 ? hours + ':' : ''}{minutes < 10 ? `0${minutes}` : minutes}:{seconds < 10 ? `0${seconds}` : seconds}</p>
+                            : <p className="text-center text-3xl font-bold mt-5"> {hours > 0 ? hours + ':' : ''}{minutes < 10 ? `0${minutes}` : minutes}:{seconds < 10 ? `0${seconds}` : seconds}</p>
                       }
                     </div>
                   </th>
@@ -323,7 +323,7 @@ export const LotteriesView: FC<{lotterie: string}> = ({ lotterie }) => {
                     </div>
                   </th>
                   <th>
-                    <div className="text-center flex flex-col mb-10">
+                    <div className="text-center flex flex-col mb-8">
                       <div>
                         <i>+
                           {(5 * amountInLottery / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}$
