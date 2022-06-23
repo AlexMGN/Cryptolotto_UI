@@ -139,28 +139,28 @@ export const AppBar: FC = props => {
 
                 <li onClick={() => setIsOpen(!isOpen)}>
                   <Link href="/">
-                    <a>Rewards</a>
+                    <a className="mobile-menu-focus">Rewards</a>
                   </Link>
                 </li>
                 <hr />
                 <li className="mb-3" onClick={() => setIsOpen(!isOpen)}>
                   <Link href="/lotteries/low">
-                    <a>Low<span style={{ color: "#F50009" }}>.</span>&nbsp; (1 USDC)</a>
+                    <a className="mobile-menu-focus">Low<span style={{ color: "#F50009" }}>.</span>&nbsp; (1 USDC)</a>
                   </Link>
                 </li>
                 <li className="mb-3" onClick={() => setIsOpen(!isOpen)}>
                   <Link href="/lotteries/medium">
-                    <a>Medium<span style={{ color: "#F50009" }}>.</span>&nbsp; (2 USDC)</a>
+                    <a className="mobile-menu-focus">Medium<span style={{ color: "#F50009" }}>.</span>&nbsp; (2 USDC)</a>
                   </Link>
                 </li>
                 <li className="mb-3" onClick={() => setIsOpen(!isOpen)}>
                   <Link href="/lotteries/degen">
-                    <a>Degen<span style={{ color: "#F50009" }}>.</span>&nbsp; (5 USDC)</a>
+                    <a className="mobile-menu-focus">Degen<span style={{ color: "#F50009" }}>.</span>&nbsp; (5 USDC)</a>
                   </Link>
                 </li>
                 <li className="mb-3" onClick={() => setIsOpen(!isOpen)}>
                   <Link href="/lotteries/whale">
-                    <a>Whale<span style={{ color: "#F50009" }}>.</span>&nbsp; (10 USDC)</a>
+                    <a className="mobile-menu-focus">Whale<span style={{ color: "#F50009" }}>.</span>&nbsp; (10 USDC)</a>
                   </Link>
                 </li>
                 <hr className="mb-5" />
