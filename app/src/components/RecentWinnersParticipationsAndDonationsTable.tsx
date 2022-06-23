@@ -8,12 +8,12 @@ export const RecentWinnersParticipationsAndDonationsTable = ({ data, resultTable
             Transaction ID
           </th>
           <th scope="col" className="px-6 py-3 text-center">
-            {lotteryOrWalletName}
+            <div>{lotteryOrWalletName}</div>
           </th>
           <th scope="col" className="px-6 py-3 text-center">
-            {amountHeadName}
+            <div>{amountHeadName}</div>
           </th>
-          <th scope="col" className="px-6 py-3 text-center">
+          <th scope="col" className="px-6 py-3 text-center hidden md:flex md:justify-center">
             Date
           </th>
         </tr>

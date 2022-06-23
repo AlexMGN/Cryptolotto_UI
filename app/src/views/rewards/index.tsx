@@ -1,15 +1,10 @@
 // Next, React
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import axios from 'axios';
-
-// Wallet
-import { useWallet, useConnection } from '@solana/wallet-adapter-react';
 
 import { RecentWinnersParticipationsAndDonationsTable } from "../../components/RecentWinnersParticipationsAndDonationsTable";
 
 export const RewardsView: FC = ({ }) => {
-  const wallet = useWallet();
-  const { connection } = useConnection();
   const [recentWinners, setRecentWinners] = useState([
     {
       id: 0,
@@ -155,10 +150,10 @@ export const RewardsView: FC = ({ }) => {
             walletAndTransactionReducer(data.wallet, 4)
           }
         </td>
-        <td className="p-0 md:px-6 md:py-4 text-center">
+        <td className="px-6 py-4 text-center">
           {data.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")} USDC
         </td>
-        <td className="p-0 md:px-6 md:py-4 text-center">
+        <td className="px-6 py-4 text-center hidden md:flex md:justify-center">
           {new Date(data.date).toUTCString()}
         </td>
       </tr>
@@ -179,7 +174,7 @@ export const RewardsView: FC = ({ }) => {
     <div className="mx-auto p-4">
       <div className="flex flex-col mt-10 md:mt-24 items-center">
         <div className="w-screen items-center text-center flex flex-col">
-          <h1 className="text-center text-4xl md:text-5xl md:pl-12 font-bold text-primary">
+          <h1 className="text-center text-4xl md:text-6xl md:pl-12 font-bold text-primary">
             Recent winners<span style={{ color: "#F50009", fontSize: "1em" }}>.</span>
           </h1>
 
@@ -187,7 +182,7 @@ export const RewardsView: FC = ({ }) => {
         </div>
 
         <div className="w-screen items-center text-center flex flex-col">
-          <h2 className="text-center text-4xl md:text-5xl md:pl-12 font-bold text-primary mt-24">
+          <h2 className="text-center text-4xl md:text-6xl md:pl-12 font-bold text-primary mt-24">
             Recent donations<span style={{ color: "#F50009", fontSize: "1em" }}>.</span>
           </h2>
 
