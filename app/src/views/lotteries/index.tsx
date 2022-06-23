@@ -136,7 +136,7 @@ export const LotteriesView: FC<{lotterie: string}> = ({ lotterie }) => {
 
   useEffect(() => {
     // Call le timestamp création loterie
-    const createLotteryTimestamp = 1655949945000;
+    const createLotteryTimestamp = 1655950063000;
     // Closed : 1655758860000
     const createLotteryPlusOneDay = new Date(createLotteryTimestamp).setDate(new Date(createLotteryTimestamp).getDate() + 1);
 
