@@ -81,7 +81,7 @@ export const AppBar: FC = () => {
                     </svg>
                   </a>
                 </div>
-                <ul tabIndex={0} className="absolute hidden p-3 shadow menu group-hover:flex bg-neutral rounded-box mt-8 w-full xl:w-1/2 z-50">
+                <ul tabIndex={0} className="absolute hidden p-3 shadow menu group-hover:flex bg-neutral rounded-box mt-6 w-full xl:w-1/2 z-50">
                   <li className="mb-3">
                     <Link href="/lotteries/low">
                       <div style={{ textAlign: "center", cursor: "pointer" }}>
