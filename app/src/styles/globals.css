@@ -129,7 +129,7 @@ a {
   }
 }
 
-.mobile-menu-focus:focus {
+.mobile-menu-focus:focus, .mobile-menu-focus:active {
   background-color: #0C6252 !important;
   color: #F5FEF9;
 }

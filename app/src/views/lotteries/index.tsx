@@ -186,7 +186,7 @@ export const LotteriesView: FC<{lotterie: string}> = ({ lotterie }) => {
           <div className="hidden md:inline relative overflow-x-auto shadow-md mt-14 reward-table md:w-[80vw] xl:w-[50vw]" style={{ borderRadius: "20px" }}>
             <table className="w-full text-sm text-left">
               <thead className="uppercase bg-primary text-neutral">
-              <tr className="flex flex-row w-full items-center justify-evenly pt-12">
+              <tr className="flex flex-row w-full items-center justify-evenly pt-12 z-O">
                 <th className="text-center text-4xl md:text-5xl font-bold">
                   <u>
                     { (lotterie === "low") && "1$ USDC" }
@@ -225,14 +225,6 @@ export const LotteriesView: FC<{lotterie: string}> = ({ lotterie }) => {
                     <h1 className="text-center text-sm md:text-5xl xl:text-6xl font-bold mt-5">
                       {amountInLottery.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}$
                     </h1>
-                  </div>
-                  <div className="text-center mt-5 flex flex-col items-end mr-8">
-                    <div>
-                      <i>+
-                        {(5 * amountInLottery / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}$
-                      </i>
-                      <p>for ONETREEPLANTED</p>
-                    </div>
                   </div>
                 </th>
               </tr>
