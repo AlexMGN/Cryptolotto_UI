@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+}
+
 html,
 body {
   padding: 0;
@@ -55,6 +61,16 @@ a {
 
 .deposit-button:hover {
   background-color: #0C6252 !important;
+  border: 2px solid #F5FEF9;
+  color: #F5FEF9;
+  text-transform: none;
+  border-radius: 50px;
+  padding-left: 5rem;
+  padding-right: 5rem;
+}
+
+.loading-button, .loading-button:hover {
+  background-color: #0C6252;
   border: 2px solid #F5FEF9;
   color: #F5FEF9;
   text-transform: none;
