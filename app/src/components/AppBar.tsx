@@ -5,7 +5,7 @@ import { WalletDisconnectButton, WalletMultiButton } from "@solana/wallet-adapte
 import logo from '../../public/logo.png';
 import { Transition } from "@headlessui/react";
 import { useWallet } from "@solana/wallet-adapter-react";
-export const AppBar: FC = props => {
+export const AppBar: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { publicKey } = useWallet();
 
@@ -55,7 +55,7 @@ export const AppBar: FC = props => {
             )}
           </button>
 
-          <div className="w-22 h-22 md:p-6 md:ml-20 hidden md:inline md:pl-10 xl:inline">
+          <div className="w-22 h-22 md:p-6 md:ml-5 hidden md:inline md:pl-10 xl:inline">
             <img style={{ maxWidth: "70%" }} src={logo.src} alt=""/>
           </div>
         </div>
@@ -66,50 +66,58 @@ export const AppBar: FC = props => {
           </div>
         </div>
 
-        {/*Links & Wallet*/}
         <div className="navbar-end flex font-display font-bold hidden md:flex">
           <div className="flex">
             <Link href="/">
-              <a className="reward-sm" style={{ textTransform: "none" }}>Rewards</a>
+              <a className="reward-sm md:text-lg xl:text-xl" style={{ textTransform: "none" }}>Rewards</a>
             </Link>
-            <div className="dropdown xl:mx-28 md:mx-10">
-              <a tabIndex={0} className="lottery-sm" style={{ textTransform: "none", cursor: "pointer" }}>Lotteries</a>
-              <ul tabIndex={0} className="p-3 shadow menu dropdown-content bg-neutral rounded-box sm:w-52">
-                <li className="mb-3">
-                  <Link href="/lotteries/low">
-                    <div style={{ textAlign: "center", cursor: "pointer" }}>
-                      <a>Low<span style={{ color: "#F50009" }}>.</span> <br />(1 USDC)</a>
-                    </div>
-                  </Link>
-                </li>
-                <hr/>
-                <li className="mb-3 pt-2">
-                  <Link href="/lotteries/medium">
-                    <div style={{ textAlign: "center", cursor: "pointer" }}>
-                      <a>Medium<span style={{ color: "#F50009" }}>.</span> <br />(2 USDC)</a>
-                    </div>
-                  </Link>
-                </li>
-                <hr/>
-                <li className="mb-3 pt-2">
-                  <Link href="/lotteries/degen">
-                    <div style={{ textAlign: "center", cursor: "pointer" }}>
-                      <a>Degen<span style={{ color: "#F50009" }}>.</span> <br />(5 USDC)</a>
-                    </div>
-                  </Link>
-                </li>
-                <hr/>
-                <li className="mb-3 pt-2" >
-                  <Link href="/lotteries/whale">
-                    <div style={{ textAlign: "center", cursor: "pointer" }}>
-                      <a>Whale<span style={{ color: "#F50009" }}>.</span> <br />(10 USDC)</a>
-                    </div>
-                  </Link>
-                </li>
-              </ul>
+            <div className="dropdown flex justify-center">
+              <div className="group flex justify-center relative">
+                <div className="flex flex-row">
+                  <a tabIndex={0} className="lottery-sm md:text-lg xl:text-xl xl:mx-28 md:mx-10 w-full flex" style={{ textTransform: "none", cursor: "pointer" }}>
+                    Lotteries
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </a>
+                </div>
+                <ul tabIndex={0} className="absolute hidden p-3 shadow menu group-hover:flex bg-neutral rounded-box mt-8 w-full xl:w-1/2 z-50">
+                  <li className="mb-3">
+                    <Link href="/lotteries/low">
+                      <div style={{ textAlign: "center", cursor: "pointer" }}>
+                        <a>Low<span style={{ color: "#F50009" }}>.</span> <br />(1 USDC)</a>
+                      </div>
+                    </Link>
+                  </li>
+                  <hr/>
+                  <li className="mb-3 pt-2">
+                    <Link href="/lotteries/medium">
+                      <div style={{ textAlign: "center", cursor: "pointer" }}>
+                        <a>Medium<span style={{ color: "#F50009" }}>.</span> <br />(2 USDC)</a>
+                      </div>
+                    </Link>
+                  </li>
+                  <hr/>
+                  <li className="mb-3 pt-2">
+                    <Link href="/lotteries/degen">
+                      <div style={{ textAlign: "center", cursor: "pointer" }}>
+                        <a>Degen<span style={{ color: "#F50009" }}>.</span> <br />(5 USDC)</a>
+                      </div>
+                    </Link>
+                  </li>
+                  <hr/>
+                  <li className="mb-3 pt-2" >
+                    <Link href="/lotteries/whale">
+                      <div style={{ textAlign: "center", cursor: "pointer" }}>
+                        <a>Whale<span style={{ color: "#F50009" }}>.</span> <br />(10 USDC)</a>
+                      </div>
+                    </Link>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
-          <div className="mr-20">
+          <div className="mr-20 md:mr-10 xl:mr-20">
             <WalletMultiButton className="btn btn-ghost mr-20 wallet-button" />
           </div>
         </div>
