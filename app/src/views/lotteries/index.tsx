@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState, Fragment, useRef } from "react";
 import { RecentWinnersParticipationsAndDonationsTable } from "../../components/RecentWinnersParticipationsAndDonationsTable";
 import { Dialog, Transition } from '@headlessui/react'
-import {notify} from "../../utils/notifications";
+import { notify } from "../../utils/notifications";
 
 export const LotteriesView: FC<{lotterie: string}> = ({ lotterie }) => {
   const [recentParticipations, setRecentParticipations] = useState([
@@ -175,8 +175,8 @@ export const LotteriesView: FC<{lotterie: string}> = ({ lotterie }) => {
             (lotterie === "medium") ? (depositAmount ? depositAmount * 2 : 0):
               (lotterie === "degen") ? (depositAmount ? depositAmount * 5 : 0):
                 (lotterie === "whale") ? (depositAmount ? depositAmount * 10 : 0): "ERROR"
-      } USDC entered!` })
-    }, 3000)
+      } USDC entered!`, txid: '1' })
+    }, 2000)
   }
 
   return (
@@ -304,28 +304,13 @@ export const LotteriesView: FC<{lotterie: string}> = ({ lotterie }) => {
                     </div>
                   </th>
                   <th className="flex flex-col w-[48.5%]">
-                    <div>
+                    <div className="mb-12">
                       <div className="text-center">
                         The total to be won in this lottery
                       </div>
                       <h2 className="text-center text-3xl font-bold mt-5">
                         {amountInLottery.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}$
                       </h2>
-                    </div>
-                  </th>
-                  <th className="flex flex-col w-[3%]">
-                    <div className="text-center flex flex-col items-center">
-                      <div style={{ borderTop: "1px solid #F5FEF9", width: "250px", marginTop: "28px", marginBottom: "28px" }}> </div>
-                    </div>
-                  </th>
-                  <th>
-                    <div className="text-center flex flex-col mb-8">
-                      <div>
-                        <i>+
-                          {(5 * amountInLottery / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}$
-                        </i>
-                        <p>for ONETREEPLANTED</p>
-                      </div>
                     </div>
                   </th>
                 </tr>
@@ -338,7 +323,7 @@ export const LotteriesView: FC<{lotterie: string}> = ({ lotterie }) => {
                   className="btn btn_sm btn-ghost wallet-button mb-3"
                   disabled={!!(lotteryEnded)}
                   onClick={() => setOpen(true)}>Deposit</button>
-                <u className="text-primary"><p className="text-primary">{(totalParticipation < 2) ? totalParticipation + " participation" : totalParticipation + " participations"}</p></u>
+                <u className="text-primary"><a href="#participations" className="text-primary">{(totalParticipation < 2) ? totalParticipation + " participation" : totalParticipation + " participations"}</a></u>
               </div>
             </div>
           </div>

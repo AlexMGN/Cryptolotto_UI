@@ -143,6 +143,10 @@ a {
     padding-left: 2.5rem;
     padding-right: 2.5rem;
   }
+
+  #notify {
+    margin: auto;
+  }
 }
 
 .mobile-menu-focus:focus, .mobile-menu-focus:active {
