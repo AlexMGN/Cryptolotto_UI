@@ -174,7 +174,7 @@ export const RewardsView: FC = ({ }) => {
     <div className="mx-auto p-4">
       <div className="flex flex-col mt-10 md:mt-24 items-center">
         <div className="w-full items-center text-center flex flex-col">
-          <h1 className="text-center text-4xl md:text-6xl md:pl-12 font-bold text-primary">
+          <h1 className="text-center text-4xl md:text-6xl font-bold text-primary">
             Recent winners<span style={{ color: "#F50009", fontSize: "1em" }}>.</span>
           </h1>
 
@@ -182,7 +182,7 @@ export const RewardsView: FC = ({ }) => {
         </div>
 
         <div className="w-full items-center text-center flex flex-col">
-          <h2 className="text-center text-4xl md:text-6xl md:pl-12 font-bold text-primary mt-24">
+          <h2 className="text-center text-4xl md:text-6xl font-bold text-primary mt-24">
             Recent donations<span style={{ color: "#F50009", fontSize: "1em" }}>.</span>
           </h2>
 
