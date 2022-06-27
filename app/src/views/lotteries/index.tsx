@@ -224,7 +224,7 @@ export const LotteriesView: FC<{lotterie: string}> = ({ lotterie }) => {
                 <th className="flex flex-col w-[48.5%] pr-12">
                   <div>
                     <div className="text-center">
-                      The total to be won in this lottery
+                      Total in this lottery
                     </div>
                     <h1 className="text-center text-sm md:text-5xl xl:text-6xl font-bold mt-5">
                       {amountInLottery.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}$
@@ -249,8 +249,8 @@ export const LotteriesView: FC<{lotterie: string}> = ({ lotterie }) => {
               <thead className="uppercase bg-primary text-neutral">
               <tr className="flex flex-row w-full items-center justify-evenly">
                 <th className="flex flex-row w-[100%]">
-                  <div className="flex items-center justify-evenly w-full">
-                    Your participations: <p className="text-5xl">{userParticipation}</p>
+                  <div className="flex items-center justify-evenly w-full flex flex-col">
+                    Your participations: <p className="text-5xl mt-2">{userParticipation}</p>
                   </div>
                 </th>
                 <th className="flex flex-col w-[3%]">
@@ -259,8 +259,8 @@ export const LotteriesView: FC<{lotterie: string}> = ({ lotterie }) => {
                   </div>
                 </th>
                 <th className="flex flex-row w-[100%]">
-                  <div className="flex items-center justify-evenly w-full">
-                    Your chances to win: <p className="text-5xl">{calculateChanceToWin(userParticipation, totalParticipation)}%</p>
+                  <div className="flex items-center justify-evenly w-full flex flex-col">
+                    Your chances to win: <p className="text-5xl mt-2">{calculateChanceToWin(userParticipation, totalParticipation)}%</p>
                   </div>
                 </th>
               </tr>
@@ -306,7 +306,7 @@ export const LotteriesView: FC<{lotterie: string}> = ({ lotterie }) => {
                   <th className="flex flex-col w-[48.5%]">
                     <div className="mb-12">
                       <div className="text-center">
-                        The total to be won in this lottery
+                        Total in this lottery
                       </div>
                       <h2 className="text-center text-3xl font-bold mt-5">
                         {amountInLottery.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}$
@@ -333,7 +333,7 @@ export const LotteriesView: FC<{lotterie: string}> = ({ lotterie }) => {
               <tr className="flex flex-col w-full items-center justify-evenly">
                 <th className="flex flex-row w-[100%]">
                   <div className="flex flex-col items-center justify-evenly w-full mt-5">
-                    Your participations: <p className="text-5xl mt-4">{userParticipation}</p>
+                    Your participations: <p className="text-5xl mt-2">{userParticipation}</p>
                   </div>
                 </th>
                 <th className="flex flex-col w-[3%]">
@@ -343,7 +343,7 @@ export const LotteriesView: FC<{lotterie: string}> = ({ lotterie }) => {
                 </th>
                 <th className="flex flex-row w-[100%]">
                   <div className="flex flex-col items-center justify-evenly w-full mb-5">
-                    Your chances to win: <p className="text-5xl mt-4">{calculateChanceToWin(userParticipation, totalParticipation)}%</p>
+                    Your chances to win: <p className="text-5xl mt-2">{calculateChanceToWin(userParticipation, totalParticipation)}%</p>
                   </div>
                 </th>
               </tr>
