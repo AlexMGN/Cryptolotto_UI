@@ -1,14 +1,11 @@
 import type { NextPage } from "next";
-import Head from "next/head";
 import { LotteriesView } from "../../views";
 import { useRouter } from 'next/router'
 import FourOhFour from "../404";
 
-const Slug: NextPage = (props) => {
+const Slug: NextPage = () => {
   const router = useRouter()
   const { slug } = router.query
-
-  console.log(slug)
 
   const getPages = () => {
     let component = null;
@@ -32,19 +29,6 @@ const Slug: NextPage = (props) => {
   };
 
   return getPages();
-
-  /*return (
-    <div>
-      <Head>
-        <title>Cryptolotto</title>
-        <meta
-          name="description"
-          content="Slug"
-        />
-      </Head>
-      <LotteriesView />
-    </div>
-  );*/
 };
 
 export default Slug;

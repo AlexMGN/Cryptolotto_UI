@@ -1,13 +1,15 @@
 [features]
 seeds = false
 [programs.localnet]
-cryptolotto = "BPMCwnBCkGPtPS2uxvbMVdusZ7gopPDGybnLkaTHMSYR"
+cryptolotto = "6bZfjVTqcCVhwXxr4qibktLfv1QHvaUbKDryxWXjQ6NB"
+[programs.devnet]
+cryptolotto = "6bZfjVTqcCVhwXxr4qibktLfv1QHvaUbKDryxWXjQ6NB"
 
 [registry]
 url = "https://anchor.projectserum.com"
 
 [provider]
-cluster = "localnet"
+cluster = "devnet"
 wallet = "/Users/alexandremignon/.config/solana/dev.json"
 
 [scripts]
