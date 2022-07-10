@@ -65,6 +65,7 @@ export const LotteriesView: FC<{lotterie: string}> = ({ lotterie }) => {
   const [totalParticipation, setTotalParticipation] = useState(1);
   const [userParticipation, setUserParticipation] = useState(2);
   const [amountInLottery, setAmountInLottery] = useState(43520);
+  const [lotteryTimestamp, setLotteryTimestamp] = useState(1657384350000);
   const [hours, setHours] = useState(null);
   const [minutes, setMinutes] = useState(null);
   const [seconds, setSeconds ] =  useState(null);
@@ -136,10 +137,7 @@ export const LotteriesView: FC<{lotterie: string}> = ({ lotterie }) => {
   }
 
   useEffect(() => {
-    // Call le timestamp création loterie
-    const createLotteryTimestamp = 1657307658000;
-    // Closed : 1655758860000
-    const createLotteryPlusOneDay = new Date(createLotteryTimestamp).setDate(new Date(createLotteryTimestamp).getDate() + 1);
+    const createLotteryPlusOneDay = new Date(lotteryTimestamp).setDate(new Date(lotteryTimestamp).getDate() + 1);
 
     const Timer = setInterval(() => {
       const timeRemaining = getTimeUntil(new Date(createLotteryPlusOneDay));
@@ -147,6 +145,7 @@ export const LotteriesView: FC<{lotterie: string}> = ({ lotterie }) => {
       if (timeRemaining <= 0){
         setLotteryEnded(true);
         clearInterval(Timer);
+        // C'est ici si on veut afficher une modal avec le gagnant
       }
     }, 1000)
   }, [setLotteryEnded, getTimeUntil])

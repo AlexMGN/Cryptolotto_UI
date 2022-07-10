@@ -9,7 +9,7 @@ use anchor_spl::token::{
 use anchor_spl::associated_token::AssociatedToken;
 use std::str::FromStr;
 
-declare_id!("BPMCwnBCkGPtPS2uxvbMVdusZ7gopPDGybnLkaTHMSYR");
+declare_id!("6bZfjVTqcCVhwXxr4qibktLfv1QHvaUbKDryxWXjQ6NB");
 
 #[program]
 pub mod cryptolotto {
@@ -21,44 +21,50 @@ pub mod cryptolotto {
         let token_program = &ctx.accounts.token_program;
 
         msg!("Distribution in progress");
-        msg!("Lottery ATA is {}",
-            ctx.accounts.lottery_ata.key().to_string()
-        );
-        msg!("Winner ATA is {}",
-            ctx.accounts.winner_ata.key().to_string()
-        );
-        msg!("Team ATA is {}",
-            ctx.accounts.team_ata.key().to_string()
-        );
-        msg!("Association ATA is {}",
-            ctx.accounts.association_ata.key().to_string()
-        );
-        msg!("Amount to distribute is {}",
-            amount
-        );
 
         let (_, lottery_pda_bump) =
             Pubkey::find_program_address(&[&lottery_type_derive_pda.as_bytes(), &lottery_timestamp], ctx.program_id);
 
-        msg!("Bump to distribute is {}",
-            lottery_pda_bump
-        );
-        transfer(
-            CpiContext::new_with_signer(
-                token_program.to_account_info(),
-                Transfer {
-                    from: ctx.accounts.lottery_ata.to_account_info(),
-                    to: ctx.accounts.winner_ata.to_account_info(),
-                    authority: ctx.accounts.lottery_ata_authority.to_account_info(),
+        let token_account_list: [&Account<TokenAccount>; 3] = [&ctx.accounts.winner_ata, &ctx.accounts.team_ata, &ctx.accounts.association_ata];
+
+        for (i, token_account) in token_account_list.iter().enumerate() {
+            let amount_to_send: u64;
+
+            match i {
+                0 => {
+                    msg!("Distribution in progress for the Winner");
+                    amount_to_send = 90 * amount / 100
                 },
-                &[&[
-                    &lottery_type_derive_pda.as_bytes(),
-                    &lottery_timestamp,
-                    &[lottery_pda_bump]
-                ]]
-            ),
-            amount - 90,
-        )?;
+                1 => {
+                    msg!("Distribution in progress for the Team Cryptolotto");
+                    amount_to_send = 5 * amount  / 100
+                },
+                2 => {
+                    msg!("Distribution in progress for the Association");
+                    amount_to_send = 5 * amount / 100
+                }
+                _ => amount_to_send = 0
+            };
+
+            transfer(
+                CpiContext::new_with_signer(
+                    token_program.to_account_info(),
+                    Transfer {
+                        from: ctx.accounts.lottery_ata.to_account_info(),
+                        to: token_account.to_account_info(),
+                        authority: ctx.accounts.lottery_ata_authority.to_account_info(),
+                    },
+                    &[&[
+                        &lottery_type_derive_pda.as_bytes(),
+                        &lottery_timestamp,
+                        &[lottery_pda_bump]
+                    ]]
+                ),
+                amount_to_send,
+            )?;
+        }
+
+        msg!("Distribution completed! Congratulations");
 
         Ok(())
     }
