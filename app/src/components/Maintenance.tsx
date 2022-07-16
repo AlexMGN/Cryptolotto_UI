@@ -1,6 +1,4 @@
-import React, { FC, useEffect, useState, Fragment, useRef } from "react";
-import { Dialog, Transition } from '@headlessui/react'
-import Link from "next/link";
+import React, { FC } from "react";
 
 export const Maintenance: FC = () => {
   return (
