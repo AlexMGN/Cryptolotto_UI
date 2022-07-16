@@ -9,6 +9,13 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
+"@discord-nestjs/core@^3.6.0":
+  version "3.6.0"
+  resolved "https://registry.npmjs.org/@discord-nestjs/core/-/core-3.6.0.tgz#2818458b5c0ae1d973b93445a82a72cc57b6f787"
+  integrity sha512-RXkfMb/LuUddfuhY622DhTIT53p/ZUFCgSR1Rzt+xdw8xoE6bF6GKNkQisZLWontMsVV/FzoFzAEzDCVdrw4aA==
+  dependencies:
+    class-transformer "0.5.1"
+
 "@ethersproject/bytes@^5.6.1":
   version "5.6.1"
   resolved "https://registry.npmjs.org/@ethersproject/bytes/-/bytes-5.6.1.tgz#24f916e411f82a8a60412344bf4a813b917eefe7"
@@ -485,6 +492,11 @@ chokidar@3.5.3:
     readdirp "~3.6.0"
   optionalDependencies:
     fsevents "~2.3.2"
+
+class-transformer@0.5.1:
+  version "0.5.1"
+  resolved "https://registry.npmjs.org/class-transformer/-/class-transformer-0.5.1.tgz#24147d5dffd2a6cea930a3250a677addf96ab336"
+  integrity sha512-SQa1Ws6hUbfC98vKGxZH3KFY0Y1lm5Zm0SY8XX9zbK7FJCyVEac3ATW0RIpwzW+oOfmHE5PMPufDG9hCfoEOMw==
 
 cliui@^7.0.2:
   version "7.0.4"
