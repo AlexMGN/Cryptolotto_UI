@@ -34,10 +34,9 @@ let _lottery_pda;
 
 /**
  * Si le Cluster est en devnet, penser a airdrop des USDC a la loterie (1 USDC suffit, pas besoin de tester les autres loteries)
- * Wallet Loterie 1 USDC : HzQskGieQ2dfkuwHzk3X3jQdNNrutP4HPXgyX6ouUuAb
+ * Wallet Loterie 1 USDC : 54eC67ghjwFGxrmAbf9bq19xMFU3pZwr48k1enVUMiEr
  */
 describe("Cryptolotto", async () => {
-  console.log(4 - 0.40889708)
   let provider = anchor.AnchorProvider.env();
   anchor.setProvider(anchor.AnchorProvider.env());
 
@@ -112,8 +111,8 @@ describe("Cryptolotto", async () => {
       )
 
       // @ts-ignore
-      await program.methods.distributeLottery(
-        (actual_cluster === LOCALNET) ? new anchor.BN(43356 * 1e6) : new anchor.BN(1000 * 1e6),
+      const txid = await program.methods.distributeLottery(
+        new anchor.BN(1000 * 1e6),
         bufferedTimestamp,
         "lottery_one"
       )
@@ -129,19 +128,21 @@ describe("Cryptolotto", async () => {
         .signers([adminWallet])
         .rpc({ skipPreflight: true })
 
+      console.log(txid)
+
       const winner_account_ata_after = await provider.connection.getParsedAccountInfo(Winner_ATA.address) as any;
       const team_account_ata_after = await provider.connection.getParsedAccountInfo(Team_ATA.address) as any;
       const association_account_ata_after = await provider.connection.getParsedAccountInfo(Association_ATA.address) as any;
       const lottery_account_ata_after = await provider.connection.getParsedAccountInfo(Lottery_USDC_ATA.address) as any;
 
       assert.equal(
-        (actual_cluster === LOCALNET) ? (90 * 43356 / 100) : (90 * 1000 / 100),
+        (90 * 1000 / 100),
         Number(winner_account_ata_after.value.data.parsed.info.tokenAmount.amount) / 1e6);
       assert.equal(
-        (actual_cluster === LOCALNET) ? (5 * 43356 / 100) : (5 * 1000 / 100),
+        (5 * 1000 / 100),
       Number(team_account_ata_after.value.data.parsed.info.tokenAmount.amount) / 1e6);
       assert.equal(
-        (actual_cluster === LOCALNET) ? (5 * 43356 / 100) : (5 * 1000 / 100),
+        (5 * 1000 / 100),
       Number(association_account_ata_after.value.data.parsed.info.tokenAmount.amount) / 1e6);
       assert.equal(0, Number(lottery_account_ata_after.value.data.parsed.info.tokenAmount.amount) / 1e6);
     });
