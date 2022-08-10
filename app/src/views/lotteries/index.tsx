@@ -65,7 +65,7 @@ export const LotteriesView: FC<{lotterie: string}> = ({ lotterie }) => {
   const [totalParticipation, setTotalParticipation] = useState(1);
   const [userParticipation, setUserParticipation] = useState(2);
   const [amountInLottery, setAmountInLottery] = useState(43520);
-  const [lotteryTimestamp, setLotteryTimestamp] = useState(1657384350000);
+  const [lotteryTimestamp, setLotteryTimestamp] = useState(1660139014000);
   const [hours, setHours] = useState(null);
   const [minutes, setMinutes] = useState(null);
   const [seconds, setSeconds ] =  useState(null);
