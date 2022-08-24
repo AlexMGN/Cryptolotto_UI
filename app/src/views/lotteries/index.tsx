@@ -124,8 +124,8 @@ export const LotteriesView: FC<{slug: string}> = ({ slug }) => {
       return
     }
 
-    if (depositAmount < 0) {
-      notify({ type: 'error', message: 'Participation should be a positive number' });
+    if (depositAmount <= 0) {
+      notify({ type: 'error', message: 'Participation should be a positive number and higher than 0' });
       return
     }
 
