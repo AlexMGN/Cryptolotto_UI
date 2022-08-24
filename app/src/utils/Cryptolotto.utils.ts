@@ -1,8 +1,7 @@
 import axios from 'axios'
 import { LotteryInterface } from "../models/Interfaces/Lottery.interface";
-import { sendAndConfirmRawTransaction, Transaction } from "@solana/web3.js";
+import { Connection, sendAndConfirmRawTransaction, Transaction } from "@solana/web3.js";
 import { AnchorWallet } from "@solana/wallet-adapter-react";
-import * as anchor from '@project-serum/anchor';
 
 const cryptolotto = axios.create({
   baseURL: process.env.NEXT_PUBLIC_CRYPTOLOTTO_API,
@@ -54,7 +53,7 @@ export default CryptolottoApi
 
 export const depositUSDC = async (slug: string, wallet: AnchorWallet, amount: number) => {
   try {
-    const connection = new anchor.web3.Connection(process.env.NEXT_PUBLIC_RPC_ENDPOINT);
+    const connection = new Connection(process.env.NEXT_PUBLIC_RPC_ENDPOINT);
 
     const { data } = await CryptolottoApi.lottery.deposit(
       slug,
