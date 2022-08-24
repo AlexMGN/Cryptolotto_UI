@@ -68,6 +68,29 @@ pub mod cryptolotto {
 
         Ok(())
     }
+
+    pub fn deposit(ctx: Context<DepositCtx>, amount: u64) -> ProgramResult {
+        let token_program = &ctx.accounts.token_program;
+
+        msg!("Deposit in progress");
+
+        transfer(
+            CpiContext::new(
+                token_program.to_account_info(),
+                Transfer {
+                    from: ctx.accounts.participant_ata.to_account_info(),
+                    to: ctx.accounts.lottery_ata.to_account_info(),
+                    authority: ctx.accounts.signer.to_account_info(),
+                },
+            ),
+            amount,
+        )?;
+
+        msg!("Deposit completed! Good Luck");
+
+        Ok(())
+    }
+
 }
 
 #[derive(Accounts)]
@@ -103,6 +126,28 @@ pub struct DistributeCtx<'info> {
         constraint = association_ata.mint == usdc_mint.key(),
     )]
     pub association_ata: Box<Account<'info, TokenAccount>>,
+    pub associated_token_program: Program<'info, AssociatedToken>,
+    pub system_program: Program<'info, System>,
+    pub rent: Sysvar<'info, Rent>,
+    pub token_program: Program<'info, Token>
+}
+
+#[derive(Accounts)]
+#[instruction(amount: u64)]
+pub struct DepositCtx<'info> {
+    #[account(mut)]
+    pub signer: Signer<'info>,
+    pub usdc_mint: Account<'info, Mint>,
+    #[account(
+        mut,
+        constraint = lottery_ata.mint == usdc_mint.key(),
+    )]
+    pub lottery_ata: Box<Account<'info, TokenAccount>>,
+    #[account(
+        mut,
+        constraint = participant_ata.mint == usdc_mint.key(),
+    )]
+    pub participant_ata: Box<Account<'info, TokenAccount>>,
     pub associated_token_program: Program<'info, AssociatedToken>,
     pub system_program: Program<'info, System>,
     pub rent: Sysvar<'info, Rent>,

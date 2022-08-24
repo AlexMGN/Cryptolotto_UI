@@ -1,71 +1,18 @@
-import React, { FC, useEffect, useState, Fragment, useRef } from "react";
+import React, {FC, useEffect, useState, Fragment, useRef, useReducer} from "react";
 import { RecentWinnersParticipationsAndDonationsTable } from "../../components/RecentWinnersParticipationsAndDonationsTable";
 import { Dialog, Transition } from '@headlessui/react'
 import { notify } from "../../utils/notifications";
+import CryptolottoApi, { depositUSDC } from "utils/Cryptolotto.utils";
+import { useAnchorWallet } from '@solana/wallet-adapter-react'
 
-export const LotteriesView: FC<{lotterie: string}> = ({ lotterie }) => {
-  const [recentParticipations, setRecentParticipations] = useState([
-    {
-      id: 0,
-      transaction: "546H4G34GVV35dazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3b",
-      wallet: "546H4G34GVV35dazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3b",
-      amount: "50000",
-      date: 1655331046687
-    },
-    {
-      id: 0,
-      transaction: "546H4G34GVV35dazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3b",
-      wallet: "546H4G34GVV35dazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3b",
-      amount: "50000",
-      date: 1655331046687
-    },
-    {
-      id: 0,
-      transaction: "546H4G34GVV35dazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3b",
-      wallet: "546H4G34GVV35dazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3b",
-      amount: "50000",
-      date: 1655331046687
-    },
-    {
-      id: 0,
-      transaction: "546H4G34GVV35dazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3b",
-      wallet: "546H4G34GVV35dazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3b",
-      amount: "50000",
-      date: 1655331046687
-    },
-    {
-      id: 0,
-      transaction: "546H4G34GVV35dazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3b",
-      wallet: "546H4G34GVV35dazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3b",
-      amount: "50000",
-      date: 1655331046687
-    },
-    {
-      id: 0,
-      transaction: "546H4G34GVV35dazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3b",
-      wallet: "546H4G34GVV35dazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3b",
-      amount: "50000",
-      date: 1655331046687
-    },
-    {
-      id: 0,
-      transaction: "546H4G34GVV35dazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3b",
-      wallet: "546H4G34GVV35dazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3b",
-      amount: "50000",
-      date: 1655331046687
-    },
-    {
-      id: 0,
-      transaction: "546H4G34GVV35dazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3b",
-      wallet: "546H4G34GVV35dazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3b",
-      amount: "50000",
-      date: 1655331046687
-    },
-  ]);
-  const [totalParticipation, setTotalParticipation] = useState(1);
-  const [userParticipation, setUserParticipation] = useState(2);
-  const [amountInLottery, setAmountInLottery] = useState(43520);
-  const [lotteryTimestamp, setLotteryTimestamp] = useState(1660139014000);
+export const LotteriesView: FC<{slug: string}> = ({ slug }) => {
+  const wallet = useAnchorWallet();
+
+  const [userParticipation, setUserParticipation] = useState(0);
+  const [recentParticipations, setRecentParticipations] = useState([]);
+  const [amountInLottery, setAmountInLottery] = useState(0);
+  const [totalParticipation, setTotalParticipation] = useState(0);
+  const [lotteryTimestamp, setLotteryTimestamp] = useState(0);
   const [hours, setHours] = useState(null);
   const [minutes, setMinutes] = useState(null);
   const [seconds, setSeconds ] =  useState(null);
@@ -90,9 +37,9 @@ export const LotteriesView: FC<{lotterie: string}> = ({ lotterie }) => {
         <th scope="row" className="p-0 md:px-6 md:py-4 font-medium text-info whitespace-nowrap text-center">
           <u>
             <a
-              href={"https://explorer.solana.com/tx/" + data.transaction}
+              href={"https://explorer.solana.com/tx/" + data.transaction_id}
               target="_blank">
-              {walletAndTransactionReducer(data.transaction, 5)}
+              {walletAndTransactionReducer(data.transaction_id, 5)}
             </a>
           </u>
         </th>
@@ -106,10 +53,10 @@ export const LotteriesView: FC<{lotterie: string}> = ({ lotterie }) => {
         </td>
         <td className="px-6 py-4 text-center">
           { (data.lottery) &&
-            data.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + 'USDC'
+          data.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + 'USDC'
           }
           { (data.wallet) &&
-            data.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+          data.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")
           }
         </td>
         <td className="px-6 py-4 text-center hidden md:flex md:justify-center">
@@ -137,17 +84,30 @@ export const LotteriesView: FC<{lotterie: string}> = ({ lotterie }) => {
   }
 
   useEffect(() => {
-    const createLotteryPlusOneDay = new Date(lotteryTimestamp).setDate(new Date(lotteryTimestamp).getDate() + 1);
+    const fetchLotteryData = async () => {
+      await refreshLotteryData(slug, wallet, setAmountInLottery, setRecentParticipations, setLotteryTimestamp, setTotalParticipation, setUserParticipation);
+    }
+    fetchLotteryData().catch((e) => {
+      console.log(e.message)
+    })
+  }, [slug])
+
+  useEffect(() => {
+    const createdLotteryPlusOneDay = new Date(lotteryTimestamp).setDate(new Date(lotteryTimestamp).getDate() + 1);
 
     const Timer = setInterval(() => {
-      const timeRemaining = getTimeUntil(new Date(createLotteryPlusOneDay));
+      const timeRemaining = getTimeUntil(new Date(createdLotteryPlusOneDay));
 
       if (timeRemaining <= 0){
         setLotteryEnded(true);
         clearInterval(Timer);
         // C'est ici si on veut afficher une modal avec le gagnant
+      } else {
+        setLotteryEnded(false);
       }
     }, 1000)
+
+    return () => clearInterval(Timer);
   }, [setLotteryEnded, getTimeUntil])
 
   const handleChange = (
@@ -164,18 +124,33 @@ export const LotteriesView: FC<{lotterie: string}> = ({ lotterie }) => {
       return
     }
 
-    setLoading(true);
-    // Envoi à l'API
-    setTimeout(() => {
+    if (depositAmount < 0) {
+      notify({ type: 'error', message: 'Participation should be a positive number' });
+      return
+    }
+
+    if (!wallet) {
+      notify({ type: 'error', message: 'You need to be connected for deposit USDC' });
+      return
+    }
+
+    try {
+      setLoading(true);
+      notify({ type: 'info', message: 'Deposit in progress do not leave this page!' });
+      const txid = await depositUSDC(slug, wallet, depositAmount);
       setOpen(false);
+      await refreshLotteryData(slug, wallet, setAmountInLottery, setRecentParticipations, setLotteryTimestamp, setTotalParticipation, setUserParticipation);
       setLoading(false);
       notify({ type: 'success', message: `Participation of ${
-          (lotterie === "low") ? (depositAmount ? depositAmount : 0):
-            (lotterie === "medium") ? (depositAmount ? depositAmount * 2 : 0):
-              (lotterie === "degen") ? (depositAmount ? depositAmount * 5 : 0):
-                (lotterie === "whale") ? (depositAmount ? depositAmount * 10 : 0): "ERROR"
-      } USDC entered!`, txid: '1' })
-    }, 2000)
+          (slug === "low") ? (depositAmount ? depositAmount : 0):
+            (slug === "medium") ? (depositAmount ? depositAmount * 2 : 0):
+              (slug === "degen") ? (depositAmount ? depositAmount * 5 : 0):
+                (slug === "whale") ? (depositAmount ? depositAmount * 10 : 0): "ERROR"
+        } USDC entered!`, txid })
+    } catch (e) {
+      notify({ type: 'error', message: e.message });
+      setLoading(false);
+    }
   }
 
   return (
@@ -183,7 +158,7 @@ export const LotteriesView: FC<{lotterie: string}> = ({ lotterie }) => {
       <div className="flex flex-col mt-10 md:mt-24 items-center">
         <div className="w-full items-center text-center flex flex-col">
           <h1 className="text-center text-4xl md:text-6xl font-bold text-primary">
-            { capitalizeFirstLetter(lotterie) }<span style={{ color: "#F50009", fontSize: "1em" }}>.</span>
+            { capitalizeFirstLetter(slug) }<span style={{ color: "#F50009", fontSize: "1em" }}>.</span>
           </h1>
 
           <div className="hidden md:inline relative overflow-x-auto shadow-md mt-14 reward-table md:w-[80vw] xl:w-[50vw]" style={{ borderRadius: "20px" }}>
@@ -192,10 +167,10 @@ export const LotteriesView: FC<{lotterie: string}> = ({ lotterie }) => {
               <tr className="flex flex-row w-full items-center justify-evenly pt-12 z-O">
                 <th className="text-center text-4xl md:text-5xl font-bold">
                   <u>
-                    { (lotterie === "low") && "1$ USDC" }
-                    { (lotterie === "medium") && "2$ USDC" }
-                    { (lotterie === "degen") && "5$ USDC" }
-                    { (lotterie === "whale") && "10$ USDC" }
+                    { (slug === "low") && "1$ USDC" }
+                    { (slug === "medium") && "2$ USDC" }
+                    { (slug === "degen") && "5$ USDC" }
+                    { (slug === "whale") && "10$ USDC" }
                   </u>
                 </th>
               </tr>
@@ -274,10 +249,10 @@ export const LotteriesView: FC<{lotterie: string}> = ({ lotterie }) => {
                 <tr className="flex flex-row w-full items-center justify-evenly pt-10">
                   <th className="text-center text-4xl md:text-5xl font-bold">
                     <u>
-                      { (lotterie === "low") && "1$ USDC" }
-                      { (lotterie === "medium") && "2$ USDC" }
-                      { (lotterie === "degen") && "5$ USDC" }
-                      { (lotterie === "whale") && "10$ USDC" }
+                      { (slug === "low") && "1$ USDC" }
+                      { (slug === "medium") && "2$ USDC" }
+                      { (slug === "degen") && "5$ USDC" }
+                      { (slug === "whale") && "10$ USDC" }
                     </u>
                   </th>
                 </tr>
@@ -360,10 +335,6 @@ export const LotteriesView: FC<{lotterie: string}> = ({ lotterie }) => {
         </div>
 
         {open ? (
-          // Faire un fichier modal et envoyer le nombre de participations pour calculer les % de chance de gagner
-          // % de chance de gagner en fonction des données dans l'input du modal
-          // L'input placer un handle change sur un state
-          // Changer la valeur du bouton par ce state
           <Transition.Root show={open} as={Fragment}>
             <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpen}>
               <div className="fixed inset-0 bg-neutral bg-opacity-75 transition-opacity" />
@@ -378,10 +349,10 @@ export const LotteriesView: FC<{lotterie: string}> = ({ lotterie }) => {
                         <div>
                           <div className="mt-3 text-center sm:mt-0 sm:text-left">
                             <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-neutral text-center">
-                              { (lotterie === "low") && "One participation is 1 USDC" }
-                              { (lotterie === "medium") && "One participation is 2 USDC" }
-                              { (lotterie === "degen") && "One participation is 5 USDC" }
-                              { (lotterie === "whale") && "One participation is 10 USDC" }
+                              { (slug === "low") && "One participation is 1 USDC" }
+                              { (slug === "medium") && "One participation is 2 USDC" }
+                              { (slug === "degen") && "One participation is 5 USDC" }
+                              { (slug === "whale") && "One participation is 10 USDC" }
                             </Dialog.Title>
                             <div style={{ borderTop: "1px solid white", width: "100%", marginTop: "28px", marginBottom: "28px" }}> </div>
                             <div className="mt-2">
@@ -407,7 +378,7 @@ export const LotteriesView: FC<{lotterie: string}> = ({ lotterie }) => {
                               <div className="mt-6 pl-16 pr-16 text-center">
                                 <p className="text-xl text-neutral flex flex-col md:flex-row items-center justify-evenly">
                                   Your chance to win: &nbsp;<span className="text-5xl">
-                                  { calculateChanceToWin(depositAmount, totalParticipation) }%
+                                  { calculateChanceToWinForDeposit(depositAmount, totalParticipation) }%
                                 </span>
                                 </p>
                               </div>
@@ -423,10 +394,10 @@ export const LotteriesView: FC<{lotterie: string}> = ({ lotterie }) => {
                                 >
                                   Participation:&nbsp;
                                   {
-                                    (lotterie === "low") ? (depositAmount ? depositAmount : 0) + " USDC" :
-                                      (lotterie === "medium") ? (depositAmount ? depositAmount * 2 : 0) + " USDC" :
-                                        (lotterie === "degen") ? (depositAmount ? depositAmount * 5 : 0) + " USDC" :
-                                          (lotterie === "whale") ? (depositAmount ? depositAmount * 10 : 0) + " USDC" : "ERROR"
+                                    (slug === "low") ? (depositAmount ? depositAmount : 0) + " USDC" :
+                                      (slug === "medium") ? (depositAmount ? depositAmount * 2 : 0) + " USDC" :
+                                        (slug === "degen") ? (depositAmount ? depositAmount * 5 : 0) + " USDC" :
+                                          (slug === "whale") ? (depositAmount ? depositAmount * 10 : 0) + " USDC" : "ERROR"
                                   }
                                 </button>
                               }
@@ -464,10 +435,66 @@ export const LotteriesView: FC<{lotterie: string}> = ({ lotterie }) => {
 };
 
 
-const calculateChanceToWin = (amount, participation) => {
+const calculateChanceToWinForDeposit = (amount, participation) => {
+  if (parseInt(amount) > 0 && participation <= 0) {
+    return 100
+  }
+
   if (parseInt(amount) > 0 && participation > 0) {
-    return ((parseInt(amount) * 100 / participation) / (participation + parseInt(amount))).toPrecision(4).replace(/\.0+$/,'')
+    const value = (
+      (
+        parseInt(amount) * 100 / (parseInt(amount) + participation)
+      )
+    ).toPrecision(4).replace(/\.0+$/,'')
+
+    if (Number(value) >= 100) return 100
+    return value
   }
 
   return 0
+}
+
+const calculateChanceToWin = (amount, participation) => {
+  if (parseInt(amount) > 0 && participation <= 0) {
+    return 100
+  }
+
+  if (parseInt(amount) > 0 && participation > 0) {
+    const value = ((parseInt(amount) * 100 / participation)).toPrecision(4).replace(/\.0+$/,'')
+
+    if (Number(value) >= 100) return 100
+    return value
+  }
+
+  return 0
+}
+
+const refreshLotteryData = async (slug, wallet, setAmountInLottery, setRecentParticipations, setLotteryTimestamp, setTotalParticipation, setUserParticipation) => {
+  const { data, status } = await CryptolottoApi.lottery.getLotteryInfo(
+    slug
+  )
+
+  const { amount } = await CryptolottoApi.lottery.getLotteryAmount(
+    data.pda.toString()
+  )
+  setAmountInLottery(amount)
+
+  setRecentParticipations(data.participations);
+
+  if (wallet) {
+    const { userParticipations } = await CryptolottoApi.lottery.getUserParticipations(
+      slug,
+      wallet.publicKey.toString()
+    )
+    setUserParticipation(userParticipations)
+  }
+
+  setLotteryTimestamp(data.timestamp);
+
+  let allParticipations = 0;
+  for (let participation of data.participations) {
+    allParticipations += Number(participation.amount)
+  }
+
+  setTotalParticipation(allParticipations);
 }
