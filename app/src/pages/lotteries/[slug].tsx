@@ -11,16 +11,16 @@ const Slug: NextPage = () => {
     let component = null;
     switch (slug) {
       case 'low':
-        component = <LotteriesView lotterie={slug} />
+        component = <LotteriesView slug={slug} />
         break;
       case 'medium':
-        component = <LotteriesView lotterie={slug} />
+        component = <LotteriesView slug={slug} />
         break;
       case 'degen':
-        component = <LotteriesView lotterie={slug} />
+        component = <LotteriesView slug={slug} />
         break;
       case 'whale':
-        component = <LotteriesView lotterie={slug} />
+        component = <LotteriesView slug={slug} />
         break;
       default:
         component = <FourOhFour />;
