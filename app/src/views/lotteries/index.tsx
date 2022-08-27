@@ -95,7 +95,7 @@ export const LotteriesView: FC<{slug: string}> = ({ slug }) => {
         console.log(e)
       }
     })
-  }, [slug])
+  }, [slug, wallet])
 
   useEffect(() => {
     if (lotteryTimestamp !== 0) {
@@ -518,6 +518,8 @@ const refreshLotteryData = async (slug, wallet, setAmountInLottery, setRecentPar
       wallet.publicKey.toString()
     )
     setUserParticipation(userParticipations)
+  } else {
+    setUserParticipation(0)
   }
 
   setLotteryTimestamp(data.timestamp);
@@ -528,4 +530,5 @@ const refreshLotteryData = async (slug, wallet, setAmountInLottery, setRecentPar
   }
 
   setTotalParticipation(allParticipations);
+  console.log(wallet)
 }
