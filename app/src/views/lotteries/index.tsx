@@ -18,7 +18,7 @@ export const LotteriesView: FC<{slug: string}> = ({ slug }) => {
   const [seconds, setSeconds ] =  useState(null);
   const [lotteryEnded, setLotteryEnded] = useState(false);
   const [open, setOpen] = useState(false);
-  const [depositAmount, setDepositAmount] = useState(0);
+  const [depositAmount, setDepositAmount] = useState('');
   const [loading, setLoading] = useState(false);
 
   const cancelButtonRef = useRef(null)
@@ -122,16 +122,25 @@ export const LotteriesView: FC<{slug: string}> = ({ slug }) => {
   ) => {
     const { value } = e.target
 
-    setDepositAmount(parseInt(value))
+    if (isNaN(parseInt(value))) {
+      setDepositAmount('')
+    } else {
+      setDepositAmount(value)
+    }
   }
 
   const deposit = async () => {
-    if (isNaN(depositAmount)) {
+    if (isNaN(Number(depositAmount))) {
       notify({ type: 'error', message: 'Participation should be a number' });
       return
     }
 
-    if (depositAmount <= 0) {
+    if (depositAmount.includes('e') || depositAmount.includes('E')) {
+      notify({ type: 'error', message: 'Participation can\'t be exponential' });
+      return
+    }
+
+    if (Number(depositAmount) <= 0) {
       notify({ type: 'error', message: 'Participation should be a positive number and higher than 0' });
       return
     }
@@ -147,23 +156,23 @@ export const LotteriesView: FC<{slug: string}> = ({ slug }) => {
       let finalAmount
 
       if (slug === "low")
-        finalAmount = depositAmount
+        finalAmount = Number(depositAmount)
       if (slug === "medium")
-        finalAmount = depositAmount * 2
+        finalAmount = Number(depositAmount) * 2
       if (slug === "degen")
-        finalAmount = depositAmount * 5
+        finalAmount = Number(depositAmount) * 5
       if (slug === "whale")
-        finalAmount = depositAmount * 10
+        finalAmount = Number(depositAmount) * 10
 
       const txid = await depositUSDC(slug, wallet, finalAmount);
       setOpen(false);
       await refreshLotteryData(slug, wallet, setAmountInLottery, setRecentParticipations, setLotteryTimestamp, setTotalParticipation, setUserParticipation);
       setLoading(false);
       notify({ type: 'success', message: `Participation of ${
-          (slug === "low") ? (depositAmount ? depositAmount : 0):
-            (slug === "medium") ? (depositAmount ? depositAmount * 2 : 0):
-              (slug === "degen") ? (depositAmount ? depositAmount * 5 : 0):
-                (slug === "whale") ? (depositAmount ? depositAmount * 10 : 0): "ERROR"
+          (slug === "low") ? (depositAmount ? Number(depositAmount) : 0):
+            (slug === "medium") ? (depositAmount ? Number(depositAmount) * 2 : 0):
+              (slug === "degen") ? (depositAmount ? Number(depositAmount) * 5 : 0):
+                (slug === "whale") ? (depositAmount ? Number(depositAmount) * 10 : 0): "ERROR"
         } USDC entered!`, txid })
     } catch (e) {
       notify({ type: 'error', message: e.message });
@@ -412,10 +421,10 @@ export const LotteriesView: FC<{slug: string}> = ({ slug }) => {
                                 >
                                   Participation:&nbsp;
                                   {
-                                    (slug === "low") ? (depositAmount ? depositAmount : 0) + " USDC" :
-                                      (slug === "medium") ? (depositAmount ? depositAmount * 2 : 0) + " USDC" :
-                                        (slug === "degen") ? (depositAmount ? depositAmount * 5 : 0) + " USDC" :
-                                          (slug === "whale") ? (depositAmount ? depositAmount * 10 : 0) + " USDC" : "ERROR"
+                                    (slug === "low") ? (depositAmount ? Number(depositAmount) : 0) + " USDC" :
+                                      (slug === "medium") ? (depositAmount ? Number(depositAmount) * 2 : 0) + " USDC" :
+                                        (slug === "degen") ? (depositAmount ? Number(depositAmount) * 5 : 0) + " USDC" :
+                                          (slug === "whale") ? (depositAmount ? Number(depositAmount) * 10 : 0) + " USDC" : "ERROR"
                                   }
                                 </button>
                               }
