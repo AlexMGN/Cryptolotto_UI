@@ -113,6 +113,16 @@ export const AppBar: FC = () => {
                       </div>
                     </Link>
                   </li>
+                  <hr/>
+                  <li className="mb-3 mt-3 pt-2" >
+                    <div style={{ textAlign: "center", cursor: "pointer" }}>
+                      <Link href="https://medium.com/@cryptolotto.one">
+                        <a target="_blank" rel="noopener noreferrer">
+                          Docs<span style={{ color: "#F50009" }}>.</span>
+                        </a>
+                      </Link>
+                    </div>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -137,11 +147,11 @@ export const AppBar: FC = () => {
               <ul className="p-4 menu h-full bg-neutral text-primary font-bold">
                 { publicKey &&
                 <div className="text-center mb-2 w-full flex justify-center">
-                  <div className="bg-primary text-neutral border-solid border-2 border-primary pl-[10px] pr-[10px] rounded-[20px]">
-                    {
-                      publicKey.toString().slice(0, 4)  + '...' + publicKey.toString().slice(-4)
-                    }
-                  </div>
+                    <div className="bg-primary text-neutral border-solid border-2 border-primary pl-[10px] pr-[10px] rounded-[20px]">
+                      {
+                        publicKey.toString().slice(0, 4)  + '...' + publicKey.toString().slice(-4)
+                      }
+                    </div>
                 </div>
                 }
 
@@ -171,12 +181,21 @@ export const AppBar: FC = () => {
                     <a className="mobile-menu-focus">Whale<span style={{ color: "#F50009" }}>.</span>&nbsp; (10 USDC)</a>
                   </Link>
                 </li>
+                <hr className="mb-3" />
+                <li className="mb-3" onClick={() => setIsOpen(!isOpen)}>
+                  <Link href="https://medium.com/@cryptolotto.one">
+                    <a className="mobile-menu-focus" target="_blank" rel="noopener noreferrer">
+                      Docs<span style={{ color: "#F50009" }}>.</span>
+                    </a>
+                  </Link>
+                </li>
                 <hr className="mb-5" />
+
                 { !publicKey &&
-                  <WalletMultiButton className="btn btn-ghost wallet-button mb-5" />
+                <WalletMultiButton className="btn btn-ghost wallet-button mb-5" />
                 }
                 { publicKey &&
-                  <WalletDisconnectButton className="btn btn-ghost wallet-button mt-5" />
+                <WalletDisconnectButton className="btn btn-ghost wallet-button mt-5" />
                 }
               </ul>
             </div>

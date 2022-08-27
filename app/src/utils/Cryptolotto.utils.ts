@@ -18,6 +18,14 @@ const CryptolottoApi = {
         status,
       }
     },
+    getLotteries: async () => {
+      const { data, status }: { data: LotteryInterface; status: number } =
+        await cryptolotto.get(`/lottery/all`)
+      return {
+        data,
+        status,
+      }
+    },
     getLotteryAmount: async (pda: string) => {
       const { data }: { data: number } =
         await cryptolotto.get(`/lottery/amount/${pda}`)
@@ -63,7 +71,15 @@ export const depositUSDC = async (slug: string, wallet: AnchorWallet, amount: nu
 
     const deserializedTx = Transaction.from(data.data);
     await wallet.signTransaction(deserializedTx);
-    const txid = await sendAndConfirmRawTransaction(connection, deserializedTx.serialize())
+
+    const { blockhash, lastValidBlockHeight } = await connection.getLatestBlockhash('finalized')
+    const txid = await connection.sendRawTransaction(deserializedTx.serialize());
+
+    await connection.confirmTransaction({
+      signature: txid,
+      blockhash,
+      lastValidBlockHeight
+    }, 'finalized');
 
     await CryptolottoApi.lottery.confirmParticipation(
       slug,

@@ -1,6 +1,7 @@
 export interface LotteryInterface {
   slug: string,
   timestamp: number,
+  extension_timestamp: number,
   pda: string,
   token_account: string,
   participations: {
@@ -15,4 +16,5 @@ export interface LotteryInterface {
   association_part: number,
   distribution_transaction_id: string,
   distribution_date: number,
+  winner: string,
 }

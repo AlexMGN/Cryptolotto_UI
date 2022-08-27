@@ -3,124 +3,12 @@ import { FC, useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 
 import { RecentWinnersParticipationsAndDonationsTable } from "../../components/RecentWinnersParticipationsAndDonationsTable";
+import {notify} from "../../utils/notifications";
+import CryptolottoApi from "../../utils/Cryptolotto.utils";
 
 export const RewardsView: FC = ({ }) => {
-  const [recentWinners, setRecentWinners] = useState([
-    {
-      id: 0,
-      transaction: "546H4G34GVV35dazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3b",
-      lottery: "low",
-      amount: "50000",
-      date: 1655331046687
-    },
-    {
-      id: 0,
-      transaction: "546H4G34GVV35dazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3b",
-      lottery: "low",
-      amount: "50000",
-      date: 1655331046687
-    },
-    {
-      id: 0,
-      transaction: "546H4G34GVV35dazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3b",
-      lottery: "low",
-      amount: "50000",
-      date: 1655331046687
-    },
-    {
-      id: 0,
-      transaction: "546H4G34GVV35dazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3b",
-      lottery: "whale",
-      amount: "50000",
-      date: 1655331046687
-    },
-    {
-      id: 0,
-      transaction: "546H4G34GVV35dazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3b",
-      lottery: "degen",
-      amount: "50000",
-      date: 1655331046687
-    },
-    {
-      id: 0,
-      transaction: "546H4G34GVV35dazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3b",
-      lottery: "low",
-      amount: "50000",
-      date: 1655331046687
-    },
-    {
-      id: 0,
-      transaction: "546H4G34GVV35dazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3b",
-      lottery: "low",
-      amount: "50000",
-      date: 1655331046687
-    },
-    {
-      id: 0,
-      transaction: "546H4G34GVV35dazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3b",
-      lottery: "low",
-      amount: "50000",
-      date: 1655331046687
-    },
-  ]);
-  const [recentDonations, setRecentDonations] = useState([
-    {
-      id: 0,
-      transaction: "546H4G34GVV35dazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3b",
-      wallet: "546H4G34GVV35dazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3b",
-      amount: "50000",
-      date: 1655331046687
-    },
-    {
-      id: 0,
-      transaction: "546H4G34GVV35dazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3b",
-      wallet: "546H4G34GVV35dazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3b",
-      amount: "50000",
-      date: 1655331046687
-    },
-    {
-      id: 0,
-      transaction: "546H4G34GVV35dazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3b",
-      wallet: "546H4G34GVV35dazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3b",
-      amount: "50000",
-      date: 1655331046687
-    },
-    {
-      id: 0,
-      transaction: "546H4G34GVV35dazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3b",
-      wallet: "546H4G34GVV35dazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3b",
-      amount: "50000",
-      date: 1655331046687
-    },
-    {
-      id: 0,
-      transaction: "546H4G34GVV35dazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3b",
-      wallet: "546H4G34GVV35dazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3b",
-      amount: "50000",
-      date: 1655331046687
-    },
-    {
-      id: 0,
-      transaction: "546H4G34GVV35dazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3b",
-      wallet: "546H4G34GVV35dazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3b",
-      amount: "50000",
-      date: 1655331046687
-    },
-    {
-      id: 0,
-      transaction: "546H4G34GVV35dazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3b",
-      wallet: "546H4G34GVV35dazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3b",
-      amount: "50000",
-      date: 1655331046687
-    },
-    {
-      id: 0,
-      transaction: "546H4G34GVV35dazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3b",
-      wallet: "546H4G34GVV35dazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3bdazddadadzadazdBYB3b",
-      amount: "50000",
-      date: 1655331046687
-    },
-  ]);
+  const [recentWinners, setRecentWinners] = useState([]);
+  const [recentDonations, setRecentDonations] = useState([]);
 
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -160,15 +48,18 @@ export const RewardsView: FC = ({ }) => {
     )
   }
 
- /* useEffect(() => {
-    axios.get(`https://jsonplaceholder.typicode.com/users`)
-      .then(res => {
-        console.log(res)
-        setTest(res.data);
-      })
-  }, [setTest])
-
-  console.log(test)*/
+  useEffect(() => {
+    const fetchLotteriesData = async () => {
+      await refreshRewardAndDonationData(setRecentWinners, setRecentDonations);
+    }
+    fetchLotteriesData().catch((e) => {
+      if (e && e.response && e.response.data && e.response.data.errors && e.response.data.errors.length > 0) {
+        notify({ type: 'error', message: e.response.data.errors[0] });
+      } else {
+        console.log(e)
+      }
+    })
+  }, [setRecentWinners, setRecentDonations])
 
   return (
     <div className="mx-auto p-4">
@@ -192,3 +83,38 @@ export const RewardsView: FC = ({ }) => {
     </div>
   );
 };
+
+const refreshRewardAndDonationData = async (setRecentWinners, setRecentDonations) => {
+  const { data, status } = await CryptolottoApi.lottery.getLotteries()
+  let recentWinners = [];
+  let recentDonations = [];
+
+  for (const lottery in data) {
+    if (data[lottery].status === 'distributed') {
+      recentWinners.push({
+        transaction: data[lottery].distribution_transaction_id,
+        lottery: data[lottery].slug,
+        amount: data[lottery].amount_win,
+        date: data[lottery].distribution_date
+      })
+
+      recentDonations.push({
+        transaction: data[lottery].distribution_transaction_id,
+        wallet: data[lottery].winner,
+        amount: data[lottery].association_part,
+        date: data[lottery].distribution_date,
+      })
+    }
+  }
+
+  recentWinners.sort(function(x, y){
+    return new Date(x.timestamp) < new Date(y.timestamp) ? 1 : -1
+  })
+
+  recentDonations.sort(function(x, y){
+    return new Date(x.timestamp) < new Date(y.timestamp) ? 1 : -1
+  })
+
+  setRecentWinners(recentWinners);
+  setRecentDonations(recentDonations);
+}
