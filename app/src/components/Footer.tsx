@@ -52,21 +52,21 @@ export const Footer: FC = () => {
                             <li className="xl:mb-3 md:mb-1.5">
                                 <Link href="/lotteries/low">
                                     <div style={{ textAlign: "center", cursor: "pointer" }}>
-                                        <a className="xl:text-lg">Private Policy</a>
+                                        <a className="xl:text-lg">How to play</a>
                                     </div>
                                 </Link>
                             </li>
                             <li className="xl:mb-3 pt-2 md:mb-1.5">
                                 <Link href="/lotteries/medium">
                                     <div style={{ textAlign: "center", cursor: "pointer" }}>
-                                        <a className="xl:text-lg">Support</a>
+                                        <a className="xl:text-lg">How it work</a>
                                     </div>
                                 </Link>
                             </li>
                             <li className="xl:mb-3 pt-2 md:mb-1.5">
                                 <Link href="/lotteries/degen">
                                     <div style={{ textAlign: "center", cursor: "pointer" }}>
-                                        <a className="xl:text-lg">Homepage</a>
+                                        <a className="xl:text-lg">Roadmap</a>
                                     </div>
                                 </Link>
                             </li>

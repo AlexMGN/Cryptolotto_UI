@@ -67,8 +67,8 @@ export const LotteriesView: FC<{slug: string}> = ({ slug }) => {
   }
 
   const getTimeUntil = (deadline) => {
-    const test = JSON.stringify(new Date());
-    const timeRemaining = Date.parse(deadline) - Date.parse(JSON.parse(test));
+    const now = JSON.stringify(new Date());
+    const timeRemaining = Date.parse(deadline) - Date.parse(JSON.parse(now));
 
     if (timeRemaining <= 0) {
       setHours(0)
@@ -88,26 +88,33 @@ export const LotteriesView: FC<{slug: string}> = ({ slug }) => {
       await refreshLotteryData(slug, wallet, setAmountInLottery, setRecentParticipations, setLotteryTimestamp, setTotalParticipation, setUserParticipation);
     }
     fetchLotteryData().catch((e) => {
-      console.log(e.message)
+      if (e && e.response && e.response.data && e.response.data.errors && e.response.data.errors.length > 0) {
+        setLotteryEnded(true);
+        notify({ type: 'error', message: e.response.data.errors[0] });
+      } else {
+        console.log(e)
+      }
     })
   }, [slug])
 
   useEffect(() => {
-    const createdLotteryPlusOneDay = new Date(lotteryTimestamp).setDate(new Date(lotteryTimestamp).getDate() + 1);
+    if (lotteryTimestamp !== 0) {
+      const createdLotteryPlusOneDay = new Date(lotteryTimestamp).setDate(new Date(lotteryTimestamp).getDate() + 1);
 
-    const Timer = setInterval(() => {
-      const timeRemaining = getTimeUntil(new Date(createdLotteryPlusOneDay));
+      const Timer = setInterval(() => {
+        const timeRemaining = getTimeUntil(new Date(createdLotteryPlusOneDay));
 
-      if (timeRemaining <= 0){
-        setLotteryEnded(true);
-        clearInterval(Timer);
-        // C'est ici si on veut afficher une modal avec le gagnant
-      } else {
-        setLotteryEnded(false);
-      }
-    }, 1000)
+        if (timeRemaining <= 0){
+          setLotteryEnded(true);
+          clearInterval(Timer);
+          // C'est ici si on veut afficher une modal avec le gagnant
+        } else {
+          setLotteryEnded(false);
+        }
+      }, 1000)
 
-    return () => clearInterval(Timer);
+      return () => clearInterval(Timer);
+    }
   }, [setLotteryEnded, getTimeUntil])
 
   const handleChange = (
@@ -115,7 +122,7 @@ export const LotteriesView: FC<{slug: string}> = ({ slug }) => {
   ) => {
     const { value } = e.target
 
-    setDepositAmount(parseInt(value));
+    setDepositAmount(parseInt(value))
   }
 
   const deposit = async () => {
@@ -137,7 +144,18 @@ export const LotteriesView: FC<{slug: string}> = ({ slug }) => {
     try {
       setLoading(true);
       notify({ type: 'info', message: 'Deposit in progress do not leave this page!' });
-      const txid = await depositUSDC(slug, wallet, depositAmount);
+      let finalAmount
+
+      if (slug === "low")
+        finalAmount = depositAmount
+      if (slug === "medium")
+        finalAmount = depositAmount * 2
+      if (slug === "degen")
+        finalAmount = depositAmount * 5
+      if (slug === "whale")
+        finalAmount = depositAmount * 10
+
+      const txid = await depositUSDC(slug, wallet, finalAmount);
       setOpen(false);
       await refreshLotteryData(slug, wallet, setAmountInLottery, setRecentParticipations, setLotteryTimestamp, setTotalParticipation, setUserParticipation);
       setLoading(false);
@@ -378,7 +396,7 @@ export const LotteriesView: FC<{slug: string}> = ({ slug }) => {
                               <div className="mt-6 pl-16 pr-16 text-center">
                                 <p className="text-xl text-neutral flex flex-col md:flex-row items-center justify-evenly">
                                   Your chance to win: &nbsp;<span className="text-5xl">
-                                  { calculateChanceToWinForDeposit(depositAmount, totalParticipation) }%
+                                  { calculateChanceToWinForDeposit(depositAmount, totalParticipation, userParticipation) }%
                                 </span>
                                 </p>
                               </div>
@@ -435,7 +453,11 @@ export const LotteriesView: FC<{slug: string}> = ({ slug }) => {
 };
 
 
-const calculateChanceToWinForDeposit = (amount, participation) => {
+const calculateChanceToWinForDeposit = (amount, participation, userParticipation) => {
+  if (userParticipation > 0) {
+    participation = participation - userParticipation
+  }
+
   if (parseInt(amount) > 0 && participation <= 0) {
     return 100
   }

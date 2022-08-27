@@ -33,15 +33,15 @@ pub mod cryptolotto {
             match i {
                 0 => {
                     msg!("Distribution in progress for the Winner");
-                    amount_to_send = 90 * amount / 100
+                    amount_to_send = 80 * amount / 100
                 },
                 1 => {
                     msg!("Distribution in progress for the Team Cryptolotto");
-                    amount_to_send = 5 * amount  / 100
+                    amount_to_send = 18 * amount  / 100
                 },
                 2 => {
                     msg!("Distribution in progress for the Association");
-                    amount_to_send = 5 * amount / 100
+                    amount_to_send = 2 * amount / 100
                 }
                 _ => amount_to_send = 0
             };
