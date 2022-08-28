@@ -91,11 +91,21 @@ export const AppBar: FC = () => {
                   </li>
                   <hr/>
                   <li className="mb-3 pt-2">
-                    <Link href="/lotteries/medium">
+                    {/* DELETE */}
+                    <div style={{ textAlign: "center", cursor: "pointer", transform: "rotate(-10deg)" }}>
+                      <a>Coming <br/> Soon<span style={{ color: "#F50009" }}>.</span> <br /></a>
+                    </div>
+                    {/* DELETE */}
+                    <div style={{ textAlign: "center", cursor: "pointer", left: 0, right: 0 }} className="absolute opacity-[0.1] ml-auto mr-auto">
+                      <a>Medium<span style={{ color: "#F50009" }}>.</span> <br />(2 USDC)</a>
+                    </div>
+
+                    {/* UNCOMMENT */}
+                    {/*<Link href="/lotteries/medium">
                       <div style={{ textAlign: "center", cursor: "pointer" }}>
                         <a>Medium<span style={{ color: "#F50009" }}>.</span> <br />(2 USDC)</a>
                       </div>
-                    </Link>
+                    </Link>*/}
                   </li>
                   <hr/>
                   <li className="mb-3 pt-2">
@@ -107,11 +117,21 @@ export const AppBar: FC = () => {
                   </li>
                   <hr/>
                   <li className="mb-3 pt-2" >
-                    <Link href="/lotteries/whale">
+                    {/* DELETE */}
+                    <div style={{ textAlign: "center", cursor: "pointer", transform: "rotate(-10deg)" }}>
+                      <a>Coming <br/> Soon<span style={{ color: "#F50009" }}>.</span> <br /></a>
+                    </div>
+                    {/* DELETE */}
+                    <div style={{ textAlign: "center", cursor: "pointer", left: 0, right: 0 }} className="absolute opacity-[0.1] ml-auto mr-auto">
+                      <a>Whale<span style={{ color: "#F50009" }}>.</span> <br />(10 USDC)</a>
+                    </div>
+
+                    {/* UNCOMMENT */}
+                    {/*<Link href="/lotteries/whale">
                       <div style={{ textAlign: "center", cursor: "pointer" }}>
                         <a>Whale<span style={{ color: "#F50009" }}>.</span> <br />(10 USDC)</a>
                       </div>
-                    </Link>
+                    </Link>*/}
                   </li>
                   <hr/>
                   <li className="mb-3 mt-3 pt-2" >
@@ -166,21 +186,31 @@ export const AppBar: FC = () => {
                     <a className="mobile-menu-focus">Low<span style={{ color: "#F50009" }}>.</span>&nbsp; (1 USDC)</a>
                   </Link>
                 </li>
-                <li className="mb-3" onClick={() => setIsOpen(!isOpen)}>
+                {/* DELETE */}
+                <li className="mb-3">
+                  <a className="mobile-menu-focus">Coming Soon<span style={{ color: "#F50009" }}>.</span></a>
+                </li>
+                {/* UNCOMMENT */}
+                {/*<li className="mb-3" onClick={() => setIsOpen(!isOpen)}>
                   <Link href="/lotteries/medium">
                     <a className="mobile-menu-focus">Medium<span style={{ color: "#F50009" }}>.</span>&nbsp; (2 USDC)</a>
                   </Link>
-                </li>
+                </li>*/}
                 <li className="mb-3" onClick={() => setIsOpen(!isOpen)}>
                   <Link href="/lotteries/degen">
                     <a className="mobile-menu-focus">Degen<span style={{ color: "#F50009" }}>.</span>&nbsp; (5 USDC)</a>
                   </Link>
                 </li>
-                <li className="mb-3" onClick={() => setIsOpen(!isOpen)}>
+                {/* DELETE */}
+                <li className="mb-3">
+                  <a className="mobile-menu-focus">Coming Soon<span style={{ color: "#F50009" }}>.</span></a>
+                </li>
+                {/* UNCOMMENT */}
+                {/*<li className="mb-3" onClick={() => setIsOpen(!isOpen)}>
                   <Link href="/lotteries/whale">
                     <a className="mobile-menu-focus">Whale<span style={{ color: "#F50009" }}>.</span>&nbsp; (10 USDC)</a>
                   </Link>
-                </li>
+                </li>*/}
                 <hr className="mb-3" />
                 <li className="mb-3" onClick={() => setIsOpen(!isOpen)}>
                   <Link href="https://medium.com/@cryptolotto.one">
