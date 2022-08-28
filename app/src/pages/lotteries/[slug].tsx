@@ -13,15 +13,17 @@ const Slug: NextPage = () => {
       case 'low':
         component = <LotteriesView slug={slug} />
         break;
-      case 'medium':
+      /* UNCOMMENT */
+      /*case 'medium':
         component = <LotteriesView slug={slug} />
-        break;
+        break;*/
       case 'degen':
         component = <LotteriesView slug={slug} />
         break;
-      case 'whale':
+      /* UNCOMMENT */
+      /*case 'whale':
         component = <LotteriesView slug={slug} />
-        break;
+        break;*/
       default:
         component = <FourOhFour />;
     }

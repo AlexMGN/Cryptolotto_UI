@@ -90,13 +90,14 @@ export const Footer: FC = () => {
                                     </div>
                                 </Link>
                             </li>
-                            <li className="xl:mb-1 pt-1.5">
+                            {/* UNCOMMENT */}
+                            {/*<li className="xl:mb-1 pt-1.5">
                                 <Link href="/lotteries/medium">
                                     <div style={{ textAlign: "center", cursor: "pointer" }}>
                                         <a className="xl:text-lg">Medium<span style={{ color: "#F50009", fontSize: "2em" }}>.</span> (2 USDC)</a>
                                     </div>
                                 </Link>
-                            </li>
+                            </li>*/}
                             <li className="xl:mb-1 pt-1.5">
                                 <Link href="/lotteries/degen">
                                     <div style={{ textAlign: "center", cursor: "pointer" }}>
@@ -104,13 +105,14 @@ export const Footer: FC = () => {
                                     </div>
                                 </Link>
                             </li>
-                            <li className="xl:mb-1 pt-1.5">
+                            {/* UNCOMMENT */}
+                            {/*<li className="xl:mb-1 pt-1.5">
                                 <Link href="/lotteries/whale">
                                     <div style={{ textAlign: "center", cursor: "pointer" }}>
                                         <a className="xl:text-lg">Whale<span style={{ color: "#F50009", fontSize: "2em" }}>.</span> (10 USDC)</a>
                                     </div>
                                 </Link>
-                            </li>
+                            </li>*/}
                         </ul>
                     </div>
                 </div>

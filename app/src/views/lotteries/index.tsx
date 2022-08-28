@@ -157,12 +157,12 @@ export const LotteriesView: FC<{slug: string}> = ({ slug }) => {
 
       if (slug === "low")
         finalAmount = Number(depositAmount)
-      if (slug === "medium")
-        finalAmount = Number(depositAmount) * 2
+      /*if (slug === "medium")
+        finalAmount = Number(depositAmount) * 2*/
       if (slug === "degen")
         finalAmount = Number(depositAmount) * 5
-      if (slug === "whale")
-        finalAmount = Number(depositAmount) * 10
+      /*if (slug === "whale")
+        finalAmount = Number(depositAmount) * 10*/
 
       const txid = await depositUSDC(slug, wallet, finalAmount);
       setOpen(false);
@@ -170,9 +170,9 @@ export const LotteriesView: FC<{slug: string}> = ({ slug }) => {
       setLoading(false);
       notify({ type: 'success', message: `Participation of ${
           (slug === "low") ? (depositAmount ? Number(depositAmount) : 0):
-            (slug === "medium") ? (depositAmount ? Number(depositAmount) * 2 : 0):
-              (slug === "degen") ? (depositAmount ? Number(depositAmount) * 5 : 0):
-                (slug === "whale") ? (depositAmount ? Number(depositAmount) * 10 : 0): "ERROR"
+            /*(slug === "medium") ? (depositAmount ? Number(depositAmount) * 2 : 0):*/
+              (slug === "degen") ? (depositAmount ? Number(depositAmount) * 5 : 0): "ERROR"
+                /*(slug === "whale") ? (depositAmount ? Number(depositAmount) * 10 : 0): "ERROR"*/
         } USDC entered!`, txid })
     } catch (e) {
       notify({ type: 'error', message: e.message });
@@ -195,9 +195,9 @@ export const LotteriesView: FC<{slug: string}> = ({ slug }) => {
                 <th className="text-center text-4xl md:text-5xl font-bold">
                   <u>
                     { (slug === "low") && "1$ USDC" }
-                    { (slug === "medium") && "2$ USDC" }
+                    {/*{ (slug === "medium") && "2$ USDC" }*/}
                     { (slug === "degen") && "5$ USDC" }
-                    { (slug === "whale") && "10$ USDC" }
+                    {/*{ (slug === "whale") && "10$ USDC" }*/}
                   </u>
                 </th>
               </tr>
@@ -277,9 +277,9 @@ export const LotteriesView: FC<{slug: string}> = ({ slug }) => {
                   <th className="text-center text-4xl md:text-5xl font-bold">
                     <u>
                       { (slug === "low") && "1$ USDC" }
-                      { (slug === "medium") && "2$ USDC" }
+                      {/*{ (slug === "medium") && "2$ USDC" }*/}
                       { (slug === "degen") && "5$ USDC" }
-                      { (slug === "whale") && "10$ USDC" }
+                      {/*{ (slug === "whale") && "10$ USDC" }*/}
                     </u>
                   </th>
                 </tr>
@@ -377,9 +377,9 @@ export const LotteriesView: FC<{slug: string}> = ({ slug }) => {
                           <div className="mt-3 text-center sm:mt-0 sm:text-left">
                             <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-neutral text-center">
                               { (slug === "low") && "One participation is 1 USDC" }
-                              { (slug === "medium") && "One participation is 2 USDC" }
+                              {/*{ (slug === "medium") && "One participation is 2 USDC" }*/}
                               { (slug === "degen") && "One participation is 5 USDC" }
-                              { (slug === "whale") && "One participation is 10 USDC" }
+                              {/*{ (slug === "whale") && "One participation is 10 USDC" }*/}
                             </Dialog.Title>
                             <div style={{ borderTop: "1px solid white", width: "100%", marginTop: "28px", marginBottom: "28px" }}> </div>
                             <div className="mt-2">
@@ -422,9 +422,9 @@ export const LotteriesView: FC<{slug: string}> = ({ slug }) => {
                                   Participation:&nbsp;
                                   {
                                     (slug === "low") ? (depositAmount ? Number(depositAmount) : 0) + " USDC" :
-                                      (slug === "medium") ? (depositAmount ? Number(depositAmount) * 2 : 0) + " USDC" :
-                                        (slug === "degen") ? (depositAmount ? Number(depositAmount) * 5 : 0) + " USDC" :
-                                          (slug === "whale") ? (depositAmount ? Number(depositAmount) * 10 : 0) + " USDC" : "ERROR"
+                                      /*(slug === "medium") ? (depositAmount ? Number(depositAmount) * 2 : 0) + " USDC" :*/
+                                        (slug === "degen") ? (depositAmount ? Number(depositAmount) * 5 : 0) + " USDC" : "ERROR"
+                                          /*(slug === "whale") ? (depositAmount ? Number(depositAmount) * 10 : 0) + " USDC" : "ERROR"*/
                                   }
                                 </button>
                               }
