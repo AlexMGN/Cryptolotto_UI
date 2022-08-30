@@ -18,3 +18,14 @@ export interface LotteryInterface {
   distribution_date: number,
   winner: string,
 }
+
+export interface TeamInterface {
+  type: string,
+  wallet: string,
+  status: string,
+  amount_distributed: number,
+  distribution_transaction_id: string,
+  distribution_date: number,
+  error_message: string,
+}
+

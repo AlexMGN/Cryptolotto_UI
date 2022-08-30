@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { LotteryInterface } from "../models/Interfaces/Lottery.interface";
+import {LotteryInterface, TeamInterface} from "../models/Interfaces/Lottery.interface";
 import { Connection, sendAndConfirmRawTransaction, Transaction } from "@solana/web3.js";
 import { AnchorWallet } from "@solana/wallet-adapter-react";
 
@@ -24,6 +24,13 @@ const CryptolottoApi = {
       return {
         data,
         status,
+      }
+    },
+    getDonations: async () => {
+      const { data }: { data: TeamInterface; status: number } =
+        await cryptolotto.get(`/lottery/donations/all`)
+      return {
+        donations: data,
       }
     },
     getLotteryAmount: async (pda: string) => {
