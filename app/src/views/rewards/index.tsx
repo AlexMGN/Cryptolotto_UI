@@ -24,7 +24,7 @@ export const RewardsView: FC = ({ }) => {
         <th scope="row" className="p-0 md:px-6 md:py-4 font-medium text-info whitespace-nowrap text-center">
           <u>
             <a
-              href={"https://explorer.solana.com/tx/" + data.transaction}
+              href={"https://solscan.io/tx/" + data.transaction}
               target="_blank">
               {walletAndTransactionReducer(data.transaction, 5)}
             </a>
@@ -86,6 +86,7 @@ export const RewardsView: FC = ({ }) => {
 
 const refreshRewardAndDonationData = async (setRecentWinners, setRecentDonations) => {
   const { data, status } = await CryptolottoApi.lottery.getLotteries()
+  const { donations } = await CryptolottoApi.lottery.getDonations()
   let recentWinners = [];
   let recentDonations = [];
 
@@ -97,14 +98,16 @@ const refreshRewardAndDonationData = async (setRecentWinners, setRecentDonations
         amount: data[lottery].amount_win,
         date: data[lottery].distribution_date
       })
-
-      recentDonations.push({
-        transaction: data[lottery].distribution_transaction_id,
-        wallet: data[lottery].winner,
-        amount: data[lottery].association_part,
-        date: data[lottery].distribution_date,
-      })
     }
+  }
+
+  for (const donation in donations) {
+    recentDonations.push({
+      transaction: donations[donation].distribution_transaction_id,
+      wallet: donations[donation].wallet,
+      amount: donations[donation].amount_distributed,
+      date: donations[donation].distribution_date,
+    })
   }
 
   recentWinners.sort(function(x, y){

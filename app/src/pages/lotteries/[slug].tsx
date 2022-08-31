@@ -13,13 +13,13 @@ const Slug: NextPage = () => {
       case 'low':
         component = <LotteriesView slug={slug} />
         break;
-      /* UNCOMMENT */
-      /*case 'medium':
-        component = <LotteriesView slug={slug} />
-        break;*/
-      case 'degen':
+      case 'medium':
         component = <LotteriesView slug={slug} />
         break;
+      /* UNCOMMENT */
+      /*case 'degen':
+        component = <LotteriesView slug={slug} />
+        break;*/
       /* UNCOMMENT */
       /*case 'whale':
         component = <LotteriesView slug={slug} />
