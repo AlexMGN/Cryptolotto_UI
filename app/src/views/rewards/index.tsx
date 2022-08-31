@@ -91,7 +91,7 @@ const refreshRewardAndDonationData = async (setRecentWinners, setRecentDonations
   let recentDonations = [];
 
   for (const lottery in data) {
-    if (data[lottery].status === 'distributed') {
+    if (data[lottery].status === 'finalized') {
       recentWinners.push({
         transaction: data[lottery].distribution_transaction_id,
         lottery: data[lottery].slug,
