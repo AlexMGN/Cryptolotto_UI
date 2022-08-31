@@ -25,7 +25,7 @@ pub mod cryptolotto {
         let (_, lottery_pda_bump) =
             Pubkey::find_program_address(&[&lottery_type_derive_pda.as_bytes(), &lottery_timestamp], ctx.program_id);
 
-        let token_account_list: [&Account<TokenAccount>; 3] = [&ctx.accounts.winner_ata, &ctx.accounts.team_ata, &ctx.accounts.association_ata];
+        let token_account_list: [&Account<TokenAccount>; 2] = [&ctx.accounts.winner_ata, &ctx.accounts.team_ata];
 
         for (i, token_account) in token_account_list.iter().enumerate() {
             let amount_to_send: u64;
@@ -37,12 +37,8 @@ pub mod cryptolotto {
                 },
                 1 => {
                     msg!("Distribution in progress for the Team Cryptolotto");
-                    amount_to_send = 18 * amount  / 100
+                    amount_to_send = 20 * amount  / 100
                 },
-                2 => {
-                    msg!("Distribution in progress for the Association");
-                    amount_to_send = 2 * amount / 100
-                }
                 _ => amount_to_send = 0
             };
 
@@ -121,11 +117,6 @@ pub struct DistributeCtx<'info> {
         constraint = team_ata.mint == usdc_mint.key(),
     )]
     pub team_ata: Box<Account<'info, TokenAccount>>,
-    #[account(
-        mut,
-        constraint = association_ata.mint == usdc_mint.key(),
-    )]
-    pub association_ata: Box<Account<'info, TokenAccount>>,
     pub associated_token_program: Program<'info, AssociatedToken>,
     pub system_program: Program<'info, System>,
     pub rent: Sysvar<'info, Rent>,
@@ -155,7 +146,7 @@ pub struct DepositCtx<'info> {
 }
 
 pub fn is_admin(signer: Pubkey) -> Result<()> {
-    if signer == Pubkey::from_str("9145ttu78U55JtCZLgomQWWXzQP96pZkjcE2ehkMsEbQ").unwrap() {
+    if signer == Pubkey::from_str("DQaQgYZ8Hw7augfc2sAZSuXYj1UwTSBFfbvBG243MVU9").unwrap() {
         Ok(())
     } else {
         return Err(error!(ErrorCode::NotAuthorized));
