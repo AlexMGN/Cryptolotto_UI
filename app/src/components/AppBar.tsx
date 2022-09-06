@@ -103,10 +103,6 @@ export const AppBar: FC = () => {
                     <div style={{ textAlign: "center", cursor: "pointer", transform: "rotate(-10deg)" }}>
                       <a>Coming <br/> Soon<span style={{ color: "#F50009" }}>.</span> <br /></a>
                     </div>
-                    {/* DELETE */}
-                    <div style={{ textAlign: "center", cursor: "pointer", left: 0, right: 0 }} className="absolute opacity-[0.1] ml-auto mr-auto">
-                      <a>Degen<span style={{ color: "#F50009" }}>.</span> <br />(5 USDC)</a>
-                    </div>
 
                     {/*<Link href="/lotteries/degen">
                       <div style={{ textAlign: "center", cursor: "pointer" }}>
@@ -119,10 +115,6 @@ export const AppBar: FC = () => {
                     {/* DELETE */}
                     <div style={{ textAlign: "center", cursor: "pointer", transform: "rotate(-10deg)" }}>
                       <a>Coming <br/> Soon<span style={{ color: "#F50009" }}>.</span> <br /></a>
-                    </div>
-                    {/* DELETE */}
-                    <div style={{ textAlign: "center", cursor: "pointer", left: 0, right: 0 }} className="absolute opacity-[0.1] ml-auto mr-auto">
-                      <a>Whale<span style={{ color: "#F50009" }}>.</span> <br />(10 USDC)</a>
                     </div>
 
                     {/* UNCOMMENT */}
