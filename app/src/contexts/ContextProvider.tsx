@@ -17,7 +17,17 @@ import { notify } from "../utils/notifications";
 
 const WalletContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const { autoConnect } = useAutoConnect();
-    const network = WalletAdapterNetwork.Devnet;
+    let network;
+    if (process.env.NEXT_PUBLIC_RPC_TYPE === 'DEVNET') {
+      network = WalletAdapterNetwork.Devnet;
+      console.log('Network set on Devnet')
+    } else if (process.env.NEXT_PUBLIC_RPC_TYPE === 'MAINNET') {
+      network = WalletAdapterNetwork.Mainnet;
+      console.log('Network set on Mainnet')
+    } else {
+      network = WalletAdapterNetwork.Testnet;
+      console.log('Network set on Testnet')
+    }
     const endpoint = useMemo(() => clusterApiUrl(network), [network]);
 
     const wallets = useMemo(

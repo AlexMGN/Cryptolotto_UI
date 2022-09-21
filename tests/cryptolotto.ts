@@ -123,8 +123,7 @@ describe("Cryptolotto", async () => {
           lotteryAta: Lottery_USDC_ATA.address,
           lotteryAtaAuthority: _lottery_pda,
           winnerAta: Winner_ATA.address,
-          teamAta: Team_ATA.address,
-          associationAta: Association_ATA.address
+          teamAta: Team_ATA.address
         })
         .signers([adminWallet])
         .rpc({ skipPreflight: true })
