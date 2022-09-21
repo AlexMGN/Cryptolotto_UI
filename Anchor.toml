@@ -4,12 +4,14 @@ seeds = false
 cryptolotto = "6bZfjVTqcCVhwXxr4qibktLfv1QHvaUbKDryxWXjQ6NB"
 [programs.devnet]
 cryptolotto = "6bZfjVTqcCVhwXxr4qibktLfv1QHvaUbKDryxWXjQ6NB"
+[programs.mainnet]
+cryptolotto = "6bZfjVTqcCVhwXxr4qibktLfv1QHvaUbKDryxWXjQ6NB"
 
 [registry]
 url = "https://anchor.projectserum.com"
 
 [provider]
-cluster = "devnet"
+cluster = "https://dimensional-light-dust.solana-mainnet.discover.quiknode.pro/d990bc54c08755815b83ef4c91662b21249861d8/"
 wallet = "/Users/alexandremignon/.config/solana/dev.json"
 
 [scripts]
