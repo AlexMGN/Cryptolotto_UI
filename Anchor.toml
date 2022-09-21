@@ -1,14 +1,18 @@
 [features]
 seeds = false
 [programs.localnet]
-cryptolotto = "Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS"
+cryptolotto = "6bZfjVTqcCVhwXxr4qibktLfv1QHvaUbKDryxWXjQ6NB"
+[programs.devnet]
+cryptolotto = "6bZfjVTqcCVhwXxr4qibktLfv1QHvaUbKDryxWXjQ6NB"
+[programs.mainnet]
+cryptolotto = "6bZfjVTqcCVhwXxr4qibktLfv1QHvaUbKDryxWXjQ6NB"
 
 [registry]
 url = "https://anchor.projectserum.com"
 
 [provider]
-cluster = "localnet"
-wallet = "/Users/alexandremignon/.config/solana/id.json"
+cluster = "https://dimensional-light-dust.solana-mainnet.discover.quiknode.pro/d990bc54c08755815b83ef4c91662b21249861d8/"
+wallet = "/Users/alexandremignon/.config/solana/dev.json"
 
 [scripts]
 test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
