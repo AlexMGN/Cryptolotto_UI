@@ -202,7 +202,7 @@ export const AppBar: FC = () => {
                 </li>*/}
                 <hr className="mb-3" />
                 <li className="mb-3" onClick={() => setIsOpen(!isOpen)}>
-                  <Link href="https://cryptolotto.gitbook.io/docs/">
+                  <Link href="https://cryptolotto.gitbook.io/docs-2/">
                     <a className="mobile-menu-focus" target="_blank" rel="noopener noreferrer">
                       Docs<span style={{ color: "#F50009" }}>.</span>
                     </a>
