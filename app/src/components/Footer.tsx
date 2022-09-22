@@ -30,7 +30,7 @@ export const Footer: FC = () => {
                                 <path d="M13.545 2.907a13.227 13.227 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.19 12.19 0 0 0-3.658 0 8.258 8.258 0 0 0-.412-.833.051.051 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.041.041 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032c.001.014.01.028.021.037a13.276 13.276 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019c.308-.42.582-.863.818-1.329a.05.05 0 0 0-.01-.059.051.051 0 0 0-.018-.011 8.875 8.875 0 0 1-1.248-.595.05.05 0 0 1-.02-.066.051.051 0 0 1 .015-.019c.084-.063.168-.129.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.052.052 0 0 1 .053.007c.08.066.164.132.248.195a.051.051 0 0 1-.004.085 8.254 8.254 0 0 1-1.249.594.05.05 0 0 0-.03.03.052.052 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.235 13.235 0 0 0 4.001-2.02.049.049 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.034.034 0 0 0-.02-.019Zm-8.198 7.307c-.789 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612Zm5.316 0c-.788 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612Z" />
                             </svg>
                         </a>
-                        <a className="mr-4 xl:mr-8" href="https://cryptolotto.gitbook.io/docs/" target="_blank">
+                        <a className="mr-4 xl:mr-8" href="https://cryptolotto.gitbook.io/docs-2/" target="_blank">
                             <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M10.802 17.77a.703.703 0 11-.002 1.406.703.703 0 01.002-1.406m11.024-4.347a.703.703 0 11.001-1.406.703.703 0 01-.001 1.406m0-2.876a2.176 2.176 0 00-2.174 2.174c0 .233.039.465.115.691l-7.181 3.823a2.165 2.165 0 00-1.784-.937c-.829 0-1.584.475-1.95 1.216l-6.451-3.402c-.682-.358-1.192-1.48-1.138-2.502.028-.533.212-.947.493-1.107.178-.1.392-.092.62.027l.042.023c1.71.9 7.304 3.847 7.54 3.956.363.169.565.237 1.185-.057l11.564-6.014c.17-.064.368-.227.368-.474 0-.342-.354-.477-.355-.477-.658-.315-1.669-.788-2.655-1.25-2.108-.987-4.497-2.105-5.546-2.655-.906-.474-1.635-.074-1.765.006l-.252.125C7.78 6.048 1.46 9.178 1.1 9.397.457 9.789.058 10.57.006 11.539c-.08 1.537.703 3.14 1.824 3.727l6.822 3.518a2.175 2.175 0 002.15 1.862 2.177 2.177 0 002.173-2.14l7.514-4.073c.38.298.853.461 1.337.461A2.176 2.176 0 0024 12.72a2.176 2.176 0 00-2.174-2.174"/>
                             </svg>
@@ -50,31 +50,23 @@ export const Footer: FC = () => {
                     <div>
                         <ul style={{ textAlignLast: "left" }}>
                             <li className="xl:mb-3 md:mb-1.5">
-                                <Link href="/lotteries/low">
-                                    <div style={{ textAlign: "center", cursor: "pointer" }}>
-                                        <a className="xl:text-lg" href="https://cryptolotto.gitbook.io/docs/how-to-play" target="_blank">How to play</a>
-                                    </div>
+                                <Link href="https://cryptolotto.gitbook.io/docs-2/how-to-play">
+                                    <a className="xl:text-lg" target="_blank" rel="noopener noreferrer">How to play</a>
                                 </Link>
                             </li>
                             <li className="xl:mb-3 pt-2 md:mb-1.5">
-                                <Link href="/lotteries/medium">
-                                    <div style={{ textAlign: "center", cursor: "pointer" }}>
-                                        <a className="xl:text-lg" href="https://cryptolotto.gitbook.io/docs/how-it-work" target="_blank">How it work</a>
-                                    </div>
+                                <Link href="https://cryptolotto.gitbook.io/docs-2/how-it-work">
+                                    <a className="xl:text-lg" target="_blank" rel="noopener noreferrer">How it work</a>
                                 </Link>
                             </li>
                             <li className="xl:mb-3 pt-2 md:mb-1.5">
-                                <Link href="/lotteries/degen">
-                                    <div style={{ textAlign: "center", cursor: "pointer" }}>
-                                        <a className="xl:text-lg" href="https://cryptolotto.gitbook.io/docs/roadmap" target="_blank">Roadmap</a>
-                                    </div>
+                                <Link href="https://cryptolotto.gitbook.io/docs-2/roadmap">
+                                    <a className="xl:text-lg" target="_blank" rel="noopener noreferrer">Roadmap</a>
                                 </Link>
                             </li>
                             <li className="xl:mb-3 pt-2">
-                                <Link href="/lotteries/whale">
-                                    <div style={{ textAlign: "center", cursor: "pointer" }}>
-                                        <a className="xl:text-lg" href="https://cryptolotto.gitbook.io/docs/an-associative-project" target="_blank">An associative project</a>
-                                    </div>
+                                <Link href="https://cryptolotto.gitbook.io/docs-2/an-associative-project">
+                                    <a className="xl:text-lg" target="_blank" rel="noopener noreferrer">An associative project</a>
                                 </Link>
                             </li>
                         </ul>
