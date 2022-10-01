@@ -127,7 +127,7 @@ export const AppBar: FC = () => {
                   <hr/>
                   <li className="mb-3 mt-3 pt-2" >
                     <div style={{ textAlign: "center", cursor: "pointer" }}>
-                      <Link href="https://cryptolotto.gitbook.io/docs-2/how-to-play">
+                      <Link href="https://cryptolotto.gitbook.io/docs-2/">
                         <a target="_blank" rel="noopener noreferrer">
                           Docs<span style={{ color: "#F50009" }}>.</span>
                         </a>
@@ -202,7 +202,7 @@ export const AppBar: FC = () => {
                 </li>*/}
                 <hr className="mb-3" />
                 <li className="mb-3" onClick={() => setIsOpen(!isOpen)}>
-                  <Link href="https://cryptolotto.gitbook.io/docs-2/how-to-play">
+                  <Link href="https://cryptolotto.gitbook.io/docs-2/">
                     <a className="mobile-menu-focus" target="_blank" rel="noopener noreferrer">
                       Docs<span style={{ color: "#F50009" }}>.</span>
                     </a>
