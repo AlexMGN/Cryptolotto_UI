@@ -127,7 +127,7 @@ export const AppBar: FC = () => {
                   <hr/>
                   <li className="mb-3 mt-3 pt-2" >
                     <div style={{ textAlign: "center", cursor: "pointer" }}>
-                      <Link href="https://cryptolotto.gitbook.io/docs/">
+                      <Link href="https://cryptolotto.gitbook.io/docs-2/">
                         <a target="_blank" rel="noopener noreferrer">
                           Docs<span style={{ color: "#F50009" }}>.</span>
                         </a>
