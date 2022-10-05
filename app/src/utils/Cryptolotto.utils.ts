@@ -79,7 +79,7 @@ export const depositUSDC = async (slug: string, wallet: AnchorWallet, amount: nu
     const deserializedTx = Transaction.from(data.data);
     await wallet.signTransaction(deserializedTx);
 
-    const { blockhash, lastValidBlockHeight } = await connection.getLatestBlockhash('finalized')
+    const { blockhash, lastValidBlockHeight } = await connection.getLatestBlockhash('confirmed')
     const txid = await connection.sendRawTransaction(deserializedTx.serialize());
 
     await connection.confirmTransaction({
